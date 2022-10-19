@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+//Landing Page
+$home-text-color:rgb(220, 220, 238);
+$home-text-size:14px;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.LandingPage{
+    width: 100%;
+    height: 100vh;
+    background-image: url(./assets/Desktop/LandingPage.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: 80px 350px 1fr;
+    grid-template-areas:
+    'div nav divs'
+    'div header divs'
+    'div image divs';
+    overflow-y: hidden;
+
+    @mixin nav($nav-width) {
+        width: $nav-width;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    %link-texts{
+        font-size: $home-text-size;
+        color: $home-text-color;
+        text-decoration: none;
+    }
+    
+    @mixin display($justify:center,$align:center,$flex:flex,$direction:row) {
+        display: $flex;
+        justify-content: $justify;
+        align-items: $align;
+        flex-direction: $direction;
+    }
+    
+    .div{
+        grid-area: div;
+    }
+    
+    .divs{
+        grid-area: divs;
+    }
+    
+    //Nav
+    nav{
+        grid-area: nav;
+        @include display(space-between,center ,flex );
+    
+        .navOne{
+            @include nav($nav-width:18%);
+    
+            img{
+                width: 100px;
+                object-fit:cover;
+            }
+    
+            a{
+                margin-top: 2px;
+                @extend %link-texts;
+            }
+        }
+    
+        .navTwo{
+            @include nav($nav-width:13%);
+    
+            a{
+                @extend %link-texts;
+            }
+    
+            span{
+                width: 70px;
+                height: 25px;
+                border-radius: 4px;
+                border: 1px solid $home-text-color;
+                @include display(center,center ,flex );
+                transition: all .4s ease;
+                cursor: pointer;
+
+                a{
+                    font-weight: 500;
+                    font-size: 12px;
+                }
+    
+                &:hover{
+                    background-color: rgba(187, 72, 158, 0.66);
+                }
+            }
+        }
+    
+    
+    }
+    
+    
+    //Header
+    header{
+        grid-area: header;
+        @include display($direction:column);
+        gap: 20px;
+    
+        h2{
+            font-size: 2.5rem;
+            color: $home-text-color;
+            font-weight: 500;
+    
+            span{
+                color: rgb(224, 43, 209);
+            }
+        }
+    
+        p{
+            width: 200px;
+            font-size: 12px;
+            color: $home-text-color;
+            text-align: center;
+            line-height: 19px
+        }
+    
+        .buttons{
+            @include display();
+            gap: 30px;
+            margin-top: 14px;
+    
+            Button:nth-of-type(1){
+                background-color: rgba(187, 72, 158, 0.66);
+                font-size: 10px;
+                height: 32px;
+                transition: all .4s ease;
+    
+                &:hover{
+                    background-color: rgba(139, 49, 116, 0.625);
+                }
+            }
+    
+            Button:nth-of-type(2){
+                background-color: rgba(54, 53, 53, 0.606);
+                font-size: 10px;
+                height: 32px;
+                transition: all .4s ease;
+                
+                &:hover{
+                    background-color: rgba(57, 57, 57, 0.752);
+                }
+            }
+        }
+    }
+    
+    .LandingImage{
+        grid-area: image;
+        @include display( );
+        img{
+            width: 70%;
+            object-fit: cover;
+        }
+    }
+}
+
+
+
+
+
