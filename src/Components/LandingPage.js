@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
 
 const LandingPage = () => {
   return (
@@ -10,16 +11,17 @@ const LandingPage = () => {
         <nav>
           <div className="navOne">
             <img src={require('../assets/Desktop/Logo.png')} alt="" />
-            <a href="/">Features</a>
+            <NavLink to="">Features</NavLink>
           </div>
 
           <div className='navTwo'>
-            <a href="/">Login</a>
+            <NavLink to="/SignIn">Login</NavLink>
             <span>
-              <a href="/">Sign up</a>
+              <NavLink to="/SignUp">Sign up</NavLink>
             </span>
           </div>
         </nav>
+
 
       <header>
         <h2>Tsks, just tasks<span>.</span></h2>
@@ -27,14 +29,21 @@ const LandingPage = () => {
           keep track of the daily tasks in life and get that satisfaction upon completion.
         </p>
         <div className="buttons">
-          <Button variant="contained">Get Started</Button>
-          <Button variant="contained">Learn More</Button>
+          <NavLink to="/SignUp">
+            <Button className='purple' variant="contained">Get Started</Button>
+          </NavLink>
+
+          <NavLink to="" >
+            <Button className='black' variant="contained">Learn More</Button>
+          </NavLink>
         </div>
       </header>
 
       <div className="LandingImage">
         <img src={require('../assets/Desktop/todoPreview.webp')} alt="" />
       </div>
+
+
 
       <div className="divs">
 
