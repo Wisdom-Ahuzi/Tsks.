@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
+import {React, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from './Header';
 import Sidebar from './Sidebar';
-
-const Dashboard = ({authentication, name,email,password,logout,handleClose,closeId,extendId}) => {
-
+const Collections = ({logout,handleClose,closeId,extendId}) => {
     let navigate = useNavigate();
     useEffect(() => {
         let authToken = sessionStorage.getItem('Auth Token');
@@ -13,14 +11,13 @@ const Dashboard = ({authentication, name,email,password,logout,handleClose,close
         }
     },[])
 
-
   return (
-    <div className='Dashboard' id={extendId}>    
-        <Header logout={logout} handleClose = {handleClose}/>
+    <div className='Collections' id={extendId}>
+        <Header logout={logout} handleClose={handleClose}/>
         <Sidebar closeId= {closeId}/>
-        {name}
+        Collections Page
     </div>
   )
 }
 
-export default Dashboard
+export default Collections

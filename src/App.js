@@ -8,22 +8,23 @@ import LandingPage from "./Components/LandingPage";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 import Dashboard from "./Components/Dashboard";
+import Error from "./Components/Error";
+import Account from './Components/Account';
+import Collections from "./Components/Collections";
 import { firebaseApp } from "./Components/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
-// import { ToastContainer, toast } from "react-toastify";
-// import 'react-toastify/dist/ReactToastify.css';
-
-
 import { useState,useEffect } from "react";
- 
+
 function App() {
+  
+  const authentication = getAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
 
-    if (authToken) {
-      navigate('/Dashboard')
+    if (!authToken) {
+      navigate('/SignIn')
     }
   }, [])
 
@@ -31,20 +32,22 @@ function App() {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState(" ");
   const[name,setName] = useState("");
+
+  //Errors in signing up or logging in
   
   const[errors,setErrors] = useState({
     emailError:"",
     passwordError:"",
     emailInUse:""
   })
-  const authentication = getAuth();
 
+  //Login and sign up
   const handleSign = (id) => {
-
     if (id === 1) {
       createUserWithEmailAndPassword(authentication, email, password)
       .then((response) => {
         sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
+      
         navigate('./Dashboard');
 
         console.log(response);
@@ -54,66 +57,120 @@ function App() {
         }).then(() => {
           // Profile updated!
           // ...
+          // sessionStorage.setItem("Name" , name);
+          // sessionStorage.setItem("Password" , password);
+          // sessionStorage.setItem("Email" , email);
+
         }).catch((error) => {
           // An error occurred
           // ...
           console.log("Unable to update name");
         });
 
-      })
-      
+      })      
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
           // toast.error('Email Already in Use');
           setErrors((prev) => {
             return{...prev,emailInUse:"Email Already In Use"}
           })
+        }else{
+          setErrors((prev) => {
+            return{...prev,emailInUse:""}
+          })
         }   
         
       })
     }
+
 
     if (id === 2) {
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
           navigate('/Dashboard');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+
+
+          updateProfile(authentication.currentUser, {
+            displayName: name
+          }).then(() => {
+            // Profile updated!
+            // ...
+            
+          }).catch((error) => {
+            // An error occurred
+            // ...
+            console.log("Unable to update name");
+          });
         })
         .catch((error) => {
           if(error.code === 'auth/wrong-password'){
-            // toast.error('Please check the Password');
             setErrors((prev) => {
               return{...prev,passwordError:"Please Check the Password"}
             })
+          }else{
+            setErrors((prev) => {
+              return{...prev,passwordError:""}
+            })
           }
           if(error.code === 'auth/user-not-found'){
-            // toast.error('Please check the Email');
             setErrors((prev) => {
               return{...prev,emailError:"Please Check the Email"}
             })
+          }else{
+            setErrors((prev) => {
+              return{...prev,emailError:""}
+            })
           }
-  
         });
-    
     }
+  }
+
+  const user = authentication.currentUser;
+  let displayName;
+  let lmail;
+  if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    displayName = user.displayName;
+    lmail = user.email;
 
   }
+
+  //Log Out
+  const handleLogout = () => {
+    sessionStorage.removeItem('Auth Token');
+    navigate('/LandingPage');
+  }
+
+
+  //Close and open Tab
+  const[closeId,setCloseId] = useState("");
+  const[extendId,setExtendId] = useState("");
+
+  const handleClose = () => {
+    if (closeId === "") {
+      setCloseId("close");
+      setExtendId("extend")
+    }else {
+      setCloseId("");
+      setExtendId("")
+    }
+  }
+ 
 
   return (
     <div className="App">
         <Routes>
           <Route
             path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
+            element={<Error/>}
           />
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/Dashboard" element={<Dashboard authentication = {authentication} name = {name} email = {email} password = {password}/>}></Route>
+          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication}  displayName = {displayName} logout = {handleLogout}/> }></Route>
+          <Route path="Account" element={<Account handleClose = {handleClose} closeId= {closeId} extendId= {extendId} displayName = {displayName} lmail = {lmail}  logout = {handleLogout}/>}></Route>    
+          <Route path="Collections" element={<Collections handleClose = {handleClose} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="/LandingPage" element={<LandingPage/>} />
-          <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} handleSign = {() => handleSign(2)}/>} ></Route>
+          <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} email = {email} handleSign = {() => handleSign(2)}/>} ></Route>
           <Route path="/SignUp" element={<SignUp setName = {setName} errors = {errors}  setEmail = {setEmail} setPassword = {setPassword} handleSign = {() => handleSign(1)}/>}></Route>
         </Routes>
     </div>

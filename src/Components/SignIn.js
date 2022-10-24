@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { NavLink } from 'react-router-dom';
+import{sendPasswordResetEmail} from "firebase/auth";
 
-const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
+const SignIn = ({setEmail, setPassword,handleSign, errors, email, authentication}) => {
 
-  
-
+ 
   return (
     <div className='Sign'>
         <div className="signIn">
@@ -33,7 +33,7 @@ const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
                     <Button className='black' variant="contained" onClick={handleSign}>Sign in</Button>
                 </NavLink>
             </div>
-            <p>Don't have an account? <span> <NavLink to="/SignUp" >Create Account</NavLink> <br /> <br /> <NavLink to=""> Forgot Password?</NavLink></span></p>
+            <p>Don't have an account? <span> <NavLink to="/SignUp" >Create Account</NavLink> <br /> <br /> <NavLink> Forgot Password?</NavLink></span></p>
         </div>
     </div>
   )

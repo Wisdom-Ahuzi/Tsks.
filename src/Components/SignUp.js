@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { NavLink } from 'react-router-dom';
 
 const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
- 
+  
   return (
     <div className='Sign'>
         <div className="signIn">
