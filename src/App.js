@@ -14,6 +14,8 @@ import Collections from "./Components/Collections";
 import { firebaseApp } from "./Components/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { useState,useEffect } from "react";
+import School from "./Components/School.js";
+import Personal from "./Components/Personal";
 
 function App() {
   
@@ -57,7 +59,7 @@ function App() {
         }).then(() => {
           // Profile updated!
           // ...
-          // sessionStorage.setItem("Name" , name);
+          sessionStorage.setItem("Name" , name);
           // sessionStorage.setItem("Password" , password);
           // sessionStorage.setItem("Email" , email);
 
@@ -89,7 +91,6 @@ function App() {
         .then((response) => {
           navigate('/Dashboard');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
-
 
           updateProfile(authentication.currentUser, {
             displayName: name
@@ -158,6 +159,31 @@ function App() {
   }
  
 
+  //Collections
+  const side = [
+    {
+        image:require("./assets/Desktop/school.png"),
+        text:"School",
+        alt:"School Image"
+    },
+    {
+        image:require("./assets/Desktop/personal.png"),
+        text:"Personal",
+        alt:"Personal Image"
+    },
+    {
+        image:require("./assets/Desktop/design.png"),
+        text:"Design",
+        alt:"Design Image"
+    },
+    {
+        image:require("./assets/Desktop/grocery.png"),
+        text:"Grocery",
+        alt:"Grocery Image"
+    }
+]
+
+
   return (
     <div className="App">
         <Routes>
@@ -166,9 +192,11 @@ function App() {
             element={<Error/>}
           />
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication}  displayName = {displayName} logout = {handleLogout}/> }></Route>
-          <Route path="Account" element={<Account handleClose = {handleClose} closeId= {closeId} extendId= {extendId} displayName = {displayName} lmail = {lmail}  logout = {handleLogout}/>}></Route>    
-          <Route path="Collections" element={<Collections handleClose = {handleClose} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication}  displayName = {displayName} logout = {handleLogout}/> }></Route>
+          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} displayName = {displayName} lmail = {lmail}  logout = {handleLogout}/>}></Route>    
+          <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="/LandingPage" element={<LandingPage/>} />
           <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} email = {email} handleSign = {() => handleSign(2)}/>} ></Route>
           <Route path="/SignUp" element={<SignUp setName = {setName} errors = {errors}  setEmail = {setEmail} setPassword = {setPassword} handleSign = {() => handleSign(1)}/>}></Route>

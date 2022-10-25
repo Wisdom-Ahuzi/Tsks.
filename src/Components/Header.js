@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-
+import { Outlet } from "react-router-dom";
 
 const Header = ({logout,handleClose}) => {
 
@@ -8,25 +8,22 @@ const Header = ({logout,handleClose}) => {
   return (
     <div className='Header'>
         <div className="headerOne">
-            <img onClick={handleClose}  src={require("../assets/Desktop/hamburger.png")} alt="Hamburger" />
+            <img onClick={handleClose}  src={require("../assets/Desktop/hamburger.png")} alt="Hamburger" title='Hamburger' />
             <li className="dashboardHeader">
-                <NavLink to="/Dashboard"><img src={require("../assets/Desktop/dashboard.png")} alt="Dashboard Icon" /></NavLink>
+                <NavLink to="/Dashboard"><img src={require("../assets/Desktop/dashboard.png")} alt="Dashboard Icon" title='Dashboard Icon'/></NavLink>
                 <NavLink to="/Dashboard">Dashboard</NavLink>
             </li>
             <li className="collectionHeader">
-                    <NavLink to="/Collections"><img src={require("../assets/Desktop/collections.png")} alt="Collections Icon" /></NavLink>
+                    <NavLink to="/Collections"><img src={require("../assets/Desktop/collections.png")} alt="Collections Icon" title="Collections Icon" /></NavLink>
                     <NavLink to="/Collections">Collections</NavLink>
             </li>
-
-            <li className="collectionHeader">
-                  <NavLink to="/Account"><img src={require("../assets/Desktop/collections.png")} alt="Collections Icon" /></NavLink>
-                  <NavLink to="/Account">Account</NavLink>
-            </li>
         </div>
+        <Outlet/>
 
         <div className="headerTwo">
-            <img src={require("../assets/Desktop/search.png")} alt="Search Icon" />
-            <img onClick={logout} src={require("../assets/Desktop/logout.png")} alt="Dashboard Icon" />
+            <NavLink to="/Account" className="acc"><img src={require("../assets/Desktop/back.png")} alt="My Account" title="My Account" /></NavLink>
+            <img src={require("../assets/Desktop/search.png")} alt="Search Icon" title='Search ' />
+            <img onClick={logout} src={require("../assets/Desktop/logout.png")} alt="Logout" title="Logout" />
         </div>
     </div>
   )

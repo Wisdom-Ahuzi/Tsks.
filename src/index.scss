@@ -293,10 +293,8 @@ $components-background:rgba(14, 14, 29, 0.877);
 }
 
 
-
-
 //Dashboard Component
-.Dashboard,.Account,.Collections{
+.Dashboard,.Account,.Collections,.Collects,.School,.Personal{
     width: 100%;
     height: 100vh;
     display: grid;
@@ -335,7 +333,18 @@ $components-background:rgba(14, 14, 29, 0.877);
     .headerTwo{
         padding-right: 20px;
         display: flex;
+        align-items: center;
         gap: 20px;
+        .acc{
+            background-color: $primary-purple;
+            border-radius: 10px;
+            @include display( );
+            img{
+                width: 35px;
+                height: 30px;
+            }
+        }
+
     }
     img{
         width: 20px;
@@ -352,9 +361,8 @@ $components-background:rgba(14, 14, 29, 0.877);
     position: relative;
     left: 0px;
     background-color: $header-backgroundColor;
-    @extend %transition;
-    transition: all .7s ease;
     @extend %link-texts;
+    animation-duration: .7s;
     
     .sidebarItems{
         height: 100%;
@@ -362,36 +370,66 @@ $components-background:rgba(14, 14, 29, 0.877);
         gap: 30px;
         padding-top: 20px;
         padding-left: 30px;
-
+        
         p{
             font-weight: 800;
         }
-        span{
-            @include display(unset,center ,flex ,row );
-            gap: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            img{
-                width: 35px;
-                height: 30px;
+        a{
+            text-decoration: none;
+            color: $home-text-color;
+            span{
+                @include display(unset,center ,flex ,row );
+                gap: 10px;
+                cursor: pointer;
+                font-weight: 500;
+                img{
+                    width: 35px;
+                    height: 30px;
+                }
             }
         }
     }
 }
 
 
-.myAccount{
+//Components @Extend
+
+%componentCover{
     grid-area: otherComponents;
     @include display( $direction:column, $justify:unset);
     width: 100%;
     height: 100%;
     background-color: $components-background;
+}
+
+%innerComponentCover{
+    margin-top: 50px;
+    @include display( $direction:column, $justify:unset,$align:unset);
+    gap: 40px;
+    width: 400px;
+    height: 100%;
+}
+
+%componentHeader{
+    @extend %link-texts;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+%button{
+    background-color: rgba(82, 80, 80, 0.752);
+    font-size: 11px;
+    height: 32px;
+    width: 110px;
+    text-transform: capitalize;
+    cursor: text;
+}
+
+.myAccount{
+    @extend %componentCover;
+
     .accountDets{
-        margin-top: 50px;
-        @include display( $direction:column, $justify:unset,$align:unset);
-        gap: 40px;
-        width: 400px;
-        height: 100%;
+        @extend %innerComponentCover;
 
         .myAccountSpan{
             @include display($justify:unset);
@@ -408,15 +446,13 @@ $components-background:rgba(14, 14, 29, 0.877);
             }
 
             p{
-                @extend %link-texts;
-                font-size: 19px;
-                font-weight: 700;
+                @extend %componentHeader;
             }
         }
 
         .accountImage{
             @include display($justify:unset);
-            gap: 20px;
+            gap: 10px;
             img{
                 width: 60px;
                 height: 60px;
@@ -492,10 +528,15 @@ $components-background:rgba(14, 14, 29, 0.877);
 
 
 #close{
-    // display: none ;
-    left: -250px ;
-    // @extend %transition;
-    transition: all .7s ease;
+    animation: sider .7s ease both;
+    @keyframes sider {
+       from{
+        left: 0;
+       }
+       to{
+        left: -250px;
+       }
+    }
 }
 
 #extend{
@@ -506,6 +547,190 @@ $components-background:rgba(14, 14, 29, 0.877);
     @extend %transition;
 }
 
-.open{
-    display: flex;
+
+.innerDashboard{
+    @extend %componentCover;
+    
+    .dashboardInfo{
+        @extend %innerComponentCover;
+
+        h4{
+            @extend %componentHeader;
+
+        }
+
+        h2{
+            @extend %link-texts;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .black{
+            @extend %button;
+        }
+
+        .overview{
+            border-radius: 12px;
+            height: 100px;
+            background-color: rgb(35, 33, 52);
+            @include display($direction:column, $justify:space-between,$align:unset);
+
+            .overviewHead{
+                height: 40px;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+                background-color: rgba(99, 99, 137, 0.752);
+                @include display($justify:unset,$align:center);
+                gap: 10px;
+                img{
+                    width: 35px;
+                    height: 30px;
+                }
+                p{
+                    @extend %link-texts;
+                    font-weight: 600;
+                }
+            }
+
+            .overviewLink{
+                border-top: .2px solid rgb(181, 181, 198);
+                height: 35px;
+                @include display( );
+                a {
+                    @include display( $justify:unset);
+                    gap: 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    @extend %link-texts;
+                    
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+//Collections Page
+
+.CollectionDets{
+    @extend %componentCover;
+
+    .innerCollectionDets{
+        @extend %innerComponentCover;
+
+        h3{
+            @extend %componentHeader;
+        }
+
+        .black{
+            @extend %button;
+        }
+
+
+        .collectionItems{
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px;
+            a{
+                text-decoration: none;
+                  
+                .collects{
+                    width: 170px;
+                    height: 130px;
+                    background-color: rgba(21, 21, 43, 0.46);
+                    padding-left: 12px;
+                    border-radius: 8px;
+                    gap: 2px;
+                    @include display($direction:column, $justify:space-evenly,$align:unset);
+                    img{
+                        width: 35px;
+                        height: 30px;
+                        margin-bottom: 20px;
+                    }
+
+                    p{
+                        @extend %link-texts;
+                        font-weight: 700;
+                        font-size: 14px;
+                    }
+
+                    span{
+                        @extend %link-texts;
+                        font-weight: 600;
+                        font-size: 12px;
+                        color: #c0bfbf;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+.innerSchool{
+    @extend %componentCover;
+
+    .schoolDets{
+        @extend %innerComponentCover;
+        width: 500px;
+    }
+
+    .schoolHeader{
+        @extend %componentHeader;
+        @include display($justify:unset );
+        gap: 13px;
+        a{
+            background-color: $primary-purple;
+            border-radius: 10px;
+            @include display( );
+            img{
+                width: 35px;
+                height: 30px;
+            }
+        }
+    }
+
+    span:nth-of-type(2){
+        @extend %componentHeader;
+        @include display($justify:unset );
+        gap: 3px;
+        img{
+            background-color: $primary-purple;
+            border-radius: 10px;
+            width: 28px;
+            height:25x;
+            position: absolute;
+            z-index: 1;
+            margin-left: 7px;
+        }
+
+        form{
+            width: 100%;
+        }
+
+        input{
+            padding-left: 45px;
+            @extend %link-texts;
+            width: 100%;
+            height: 40px;
+            background-color: $header-backgroundColor;
+            outline: none;
+            border: .2px solid #c0bfbf;
+            border-radius: 15px;
+            position: relative;
+            z-index: 0;
+            &::placeholder{
+                color: $home-text-color;
+            }
+        }
+    }
 }

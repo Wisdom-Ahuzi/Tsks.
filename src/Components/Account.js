@@ -6,13 +6,7 @@ import Button from '@mui/material/Button';
 import{v4 as uuidv4} from "uuid";
 import { display } from '@mui/system';
 
-const Account = ({logout,displayName,lmail,handleClose,closeId,extendId}) => {
-
-  const [displayMail, setDisplayMail] = useState({
-    display:"",
-    mail:""
-  })
-
+const Account = ({logout,displayName,lmail,handleClose,closeId,extendId, side}) => {
 
   let navigate = useNavigate();
   useEffect(() => {
@@ -25,7 +19,7 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId}) => {
   const accountDetails = [
     {
       text:"Display Name",
-      name:displayName,
+      name:sessionStorage.getItem("Name"),
       edit : "Edit"
     },
     {
@@ -47,17 +41,17 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId}) => {
   return (
     <div className='Account' id={extendId}>
         <Header logout={logout} handleClose = {handleClose}/>
-        <Sidebar closeId= {closeId}/>
+        <Sidebar closeId= {closeId} side = {side}/>
         <div className="myAccount">
           <div className="accountDets">
             <span className='myAccountSpan'>
-              <NavLink to="/Dashboard"> <img src={require("../assets/Desktop/back.png")} alt="" /> </NavLink>
+              <NavLink to="/Dashboard"> <img src={require("../assets/Desktop/back.png")} alt="Goto Dashboard" title="Dashboard" /> </NavLink>
               <p>My Account</p>
             </span>
 
             <div className='accountImage'>
               <img src={require("../assets/Desktop/profile.jpeg")} alt="" />
-              <p>{displayName}</p>
+              <p>{sessionStorage.getItem("Name")}</p>
             </div>
 
             <div className="accountItems">
@@ -77,7 +71,7 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId}) => {
             })}
 
             </div>
-            <Button className='signOut' onClick={logout} variant="contained">Sign Out</Button>
+            <Button className='signOut' onClick={logout} variant="contained" title="Logout" >Sign Out</Button>
           </div>
         </div>
       </div>
