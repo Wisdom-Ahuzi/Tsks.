@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-const Dashboard = ({authentication, name,email,password,logout,handleClose,closeId,extendId,side}) => {
+const Dashboard = ({authentication,disName,email,password,logout,handleClose,closeId,extendId,side}) => {
 
     let navigate = useNavigate();
     useEffect(() => {
@@ -20,12 +20,12 @@ const Dashboard = ({authentication, name,email,password,logout,handleClose,close
     const dashItems= [
         {
             icon:require("../assets/Desktop/design.png"),
-            word: "design",
+            word: "Design",
             to:"/Design"
         },
         {
             icon:require("../assets/Desktop/school.png"),
-            word: "school",
+            word: "School",
             to:"/School"
         }
         
@@ -38,7 +38,7 @@ const Dashboard = ({authentication, name,email,password,logout,handleClose,close
         <div className="innerDashboard">
            <div className="dashboardInfo">
                 <h4>Dashboard</h4>
-                <h2>Hey, <br /> {sessionStorage.getItem("Name")}</h2>
+                <h2>Hey, <br /> {disName}</h2>
                 <Button className='black' variant="contained">Daily Overview</Button>
                 {dashItems.map(item => {
                     return(
@@ -48,7 +48,7 @@ const Dashboard = ({authentication, name,email,password,logout,handleClose,close
                             <p>{item.word}</p>
                         </div>
                         <div className="overviewLink">
-                            <NavLink to={item.to}> Go to {item.word} <img src={require("../assets/Desktop/logout.png")} alt="GoTo" title="GoTo" /> </NavLink>
+                            <NavLink to={item.to}> Go to {item.word} <img src={require("../assets/Desktop/goto.png")} alt="GoTo" title="GoTo" /> </NavLink>
                         </div>
                     </div>
                     )

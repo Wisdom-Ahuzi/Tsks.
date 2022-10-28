@@ -22,7 +22,7 @@ const Collections = ({logout,handleClose,closeId,extendId, side}) => {
         <div className="CollectionDets">
          <div className="innerCollectionDets">
             <h3>Collections</h3>
-            <Button className='black' variant="contained">Daily Overview</Button>
+            <Button className='black' variant="contained">All Collections</Button>
             <div className="collectionItems">
             {side.map(item => {
               return(
@@ -30,7 +30,7 @@ const Collections = ({logout,handleClose,closeId,extendId, side}) => {
                   <div className="collects">
                     <img src={item.image} alt={item.alt} />
                     <p>{item.text}</p>
-                    <span>your collections</span>
+                    <img className='img' src={require("../assets/Desktop/con.png")} alt="" />
                   </div>
                 </NavLink>
               )

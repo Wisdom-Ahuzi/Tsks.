@@ -16,6 +16,9 @@ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,upda
 import { useState,useEffect } from "react";
 import School from "./Components/School.js";
 import Personal from "./Components/Personal";
+import UpdateDisplayName from "./Components/UpdateDisplayName";
+import UpdateEmail from "./Components/UpdateEmail";
+import UpdatePassword from "./Components/UpdatePassword";
 
 function App() {
   
@@ -26,7 +29,7 @@ function App() {
     let authToken = sessionStorage.getItem('Auth Token')
 
     if (!authToken) {
-      navigate('/SignIn')
+      navigate('/LandingPage')
     }
   }, [])
 
@@ -184,6 +187,21 @@ function App() {
 ]
 
 
+  //Update Display Name
+  const [disName,setDisName] = useState("");
+
+  const handleUpdate = () =>{
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+    displayName: disName
+    }).then(() => {
+        navigate('/Account');
+        
+    }).catch((error) => {
+        console.log("error:",error);
+    });
+  }  
+
   return (
     <div className="App">
         <Routes>
@@ -192,11 +210,14 @@ function App() {
             element={<Error/>}
           />
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication}  displayName = {displayName} logout = {handleLogout}/> }></Route>
-          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} displayName = {displayName} lmail = {lmail}  logout = {handleLogout}/>}></Route>    
+          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication} disName = {disName}  logout = {handleLogout}/> }></Route>
+          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} disName = {disName}  lmail = {lmail}  logout = {handleLogout}/>}></Route>    
           <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName} handleUpdate = {handleUpdate}/>}></Route>
+          <Route path="UpdateEmail" element={<UpdateEmail/>}></Route>
+          <Route path="UpdatePassword" element={<UpdatePassword/>}></Route>
           <Route path="/LandingPage" element={<LandingPage/>} />
           <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} email = {email} handleSign = {() => handleSign(2)}/>} ></Route>
           <Route path="/SignUp" element={<SignUp setName = {setName} errors = {errors}  setEmail = {setEmail} setPassword = {setPassword} handleSign = {() => handleSign(1)}/>}></Route>

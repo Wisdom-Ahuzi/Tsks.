@@ -3,8 +3,8 @@
 $home-text-color:rgb(220, 220, 238);
 $home-text-size:14px;
 $primary-purple:rgba(187, 72, 158, 0.66);
-$header-backgroundColor: rgba(21, 21, 43, 0.877);
-$components-background:rgba(14, 14, 29, 0.877);
+$header-backgroundColor: rgba(32, 33, 44, 100%);
+$components-background:rgb(23, 24, 31, 100%);
 
 @mixin nav($nav-width) {
     width: $nav-width;
@@ -160,7 +160,7 @@ $components-background:rgba(14, 14, 29, 0.877);
             }
     
             .black{
-                background-color: rgba(48, 48, 48, 0.752);
+                background-color: rgb(65, 64, 82,100%);
                 font-size: 10px;
                 height: 32px;
                 @extend %transition;
@@ -247,7 +247,7 @@ $components-background:rgba(14, 14, 29, 0.877);
                 }
 
                 &:focus{
-                    outline: 1px solid red ;
+                    outline: 1px solid $primary-purple ;
                     border-radius: 5px;
                 }
 
@@ -307,13 +307,18 @@ $components-background:rgba(14, 14, 29, 0.877);
 
 //Header Component
 .Header{
+    position: fixed;
+    width: 100%;
+    height: 45px;
+    z-index: 5;
     grid-area: dashboardHeader;
     @include display(space-between,center , flex, );
     background-color: $header-backgroundColor;
     color: $home-text-color;
     font-size: $home-text-size;
     font-weight: 500;
-    box-shadow: 10px 2px 5px #c0bfbf;
+    box-shadow: 10px 2px 5px rgb(23, 24, 31, 100%);
+  
     cursor: pointer;
     .headerOne{
         @include display(unset,center , flex, );
@@ -336,12 +341,11 @@ $components-background:rgba(14, 14, 29, 0.877);
         align-items: center;
         gap: 20px;
         .acc{
-            background-color: $primary-purple;
-            border-radius: 10px;
             @include display( );
             img{
-                width: 35px;
-                height: 30px;
+                width: 30px;
+                height: 27px;
+                border-radius: 10px;
             }
         }
 
@@ -425,18 +429,31 @@ $components-background:rgba(14, 14, 29, 0.877);
     cursor: text;
 }
 
+%pOne{
+    font-size: 12px;
+    font-weight: 600;
+    color: #c0bfbf;
+}
+
+%pTwo{
+    @extend %link-texts;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 .myAccount{
     @extend %componentCover;
 
     .accountDets{
         @extend %innerComponentCover;
-
+        gap: 25px;
         .myAccountSpan{
             @include display($justify:unset);
             gap: 10px;
+            margin-bottom: 20px;
 
             a{
-                background-color: $primary-purple;
+                background-color: rgb(65, 64, 82,100%);
                 border-radius: 10px;
                 @include display( );
                 img{
@@ -469,8 +486,8 @@ $components-background:rgba(14, 14, 29, 0.877);
 
         .accountItems{
             border-radius: 10px;
-            height: 250px;
-            background-color:rgb(35, 33, 52);
+            height: 200px;
+            background-color:rgb(32, 33, 44,100%);
             @include display($align:unset,$justify:space-evenly,$direction:column);
             div{
                 @include display($justify:space-between);
@@ -481,15 +498,11 @@ $components-background:rgba(14, 14, 29, 0.877);
                     gap: 5px;
                     @include display( $direction:column,$align:start);
                     p:nth-of-type(1){
-                        font-size: 12px;
-                        font-weight: 600;
-                        color: #c0bfbf;
+                        @extend %pOne;
                     }
 
                     p:nth-of-type(2){
-                        @extend %link-texts;
-                        font-size: 13px;
-                        font-weight: 600;
+                        @extend %pTwo;
                     }
                 }
 
@@ -499,28 +512,83 @@ $components-background:rgba(14, 14, 29, 0.877);
                         width: 50px;
                         height: 30px;
                         font-size: 11px;
-                        background-color:$primary-purple;
+                        background-color:rgb(65, 64, 82,100%);
                         @extend %transition;
 
-                        &:hover{
-                            background-color: rgba(139, 49, 116, 0.625);
-                        }
+                        // &:hover{
+                        //     // background-color: rgb(151,71,225,100%);
+                        // }
                     }
                 }
 
             }
         }
+        .pro{
+            border-radius: 10px;
+            height: 130px;
+            background-color:rgb(32, 33, 44,100%);
+            @include display( $direction:column,$justify:space-between);
+
+            .first{
+                width: 100%;
+                height: 100px;
+                @include display($justify:space-between);
+                padding-inline: 10px;
+                
+                span{
+                    p:nth-of-type(1){
+                        @extend %pOne;
+                    }
+
+                    p:nth-of-type(2){
+                        @extend %pTwo;
+                        margin-top: 2px;
+                    }
+                }
+
+                a{
+                    @extend %link-texts;
+                    .black{
+                        width: 130px;
+                        font-size: 12px;
+                        background-color: $primary-purple;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            .proBenefits{
+                height: 50px;
+                background-color: slateblue;
+                width: 100%;
+                box-shadow: 1px 2px 5px rgb(22, 23, 29);
+                background-color: rgb(39, 40, 51, 100%);
+                border-end-end-radius: 10px;
+                border-end-start-radius: 10px;
+                @include display();
+                a{
+                    font-weight: 500;
+                    @include display($justify:unset);
+                    gap: 6px;
+                    @extend %link-texts;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
         .signOut{
-            background-color: $primary-purple;
+            background-color: rgb(65, 64, 82,100%);
             @extend %link-texts;
             font-size: 11px;
             margin: 0 auto;
             width: 100px;
             @extend %transition;
 
-            &:hover{
-                background-color: rgba(139, 49, 116, 0.625);
-            }
+            // &:hover{
+            //     // background-color: rgb(151,71,225,100%);
+            // }
         }
     }
 }
@@ -567,24 +635,27 @@ $components-background:rgba(14, 14, 29, 0.877);
 
         .black{
             @extend %button;
+            background-color: rgb(65, 64, 82,100%);
         }
 
         .overview{
             border-radius: 12px;
-            height: 100px;
-            background-color: rgb(35, 33, 52);
+            min-height: 170px;
+            background-color: rgb(32, 33, 44,100%);
             @include display($direction:column, $justify:space-between,$align:unset);
 
             .overviewHead{
-                height: 40px;
+                box-shadow: 1px 2px 5px rgb(22, 23, 29);
+                height: 50px;
                 border-top-left-radius: 12px;
                 border-top-right-radius: 12px;
-                background-color: rgba(99, 99, 137, 0.752);
+                background-color: rgb(39, 40, 51, 100%);
                 @include display($justify:unset,$align:center);
                 gap: 10px;
+                padding-left: 10px;
                 img{
-                    width: 35px;
-                    height: 30px;
+                    width: 26px;
+                    height: 24px;
                 }
                 p{
                     @extend %link-texts;
@@ -593,7 +664,7 @@ $components-background:rgba(14, 14, 29, 0.877);
             }
 
             .overviewLink{
-                border-top: .2px solid rgb(181, 181, 198);
+                border-top: .2px solid #c0bfbf;
                 height: 35px;
                 @include display( );
                 a {
@@ -631,6 +702,8 @@ $components-background:rgba(14, 14, 29, 0.877);
 
         .black{
             @extend %button;
+            background-color: rgb(65, 64, 82,100%);
+            border-radius: 8px;
         }
 
 
@@ -643,12 +716,12 @@ $components-background:rgba(14, 14, 29, 0.877);
                 text-decoration: none;
                   
                 .collects{
-                    width: 170px;
-                    height: 130px;
-                    background-color: rgba(21, 21, 43, 0.46);
+                    width: 185px;
+                    height: 145px;
+                    background-color: rgb(32, 33, 44,100%);
                     padding-left: 12px;
-                    border-radius: 8px;
-                    gap: 2px;
+                    border-radius: 15px;
+                    // gap: 2px;
                     @include display($direction:column, $justify:space-evenly,$align:unset);
                     img{
                         width: 35px;
@@ -659,14 +732,13 @@ $components-background:rgba(14, 14, 29, 0.877);
                     p{
                         @extend %link-texts;
                         font-weight: 700;
-                        font-size: 14px;
+                        font-size: 18px;
                     }
 
-                    span{
-                        @extend %link-texts;
-                        font-weight: 600;
-                        font-size: 12px;
-                        color: #c0bfbf;
+                    .img{
+                        width: 20px;
+                        height: 15px;
+                        margin-bottom: 10px;
                     }
                 }
             }
@@ -676,6 +748,8 @@ $components-background:rgba(14, 14, 29, 0.877);
 }
 
 
+
+//School, Design, Personal,Grocery
 .innerSchool{
     @extend %componentCover;
 
@@ -689,7 +763,7 @@ $components-background:rgba(14, 14, 29, 0.877);
         @include display($justify:unset );
         gap: 13px;
         a{
-            background-color: $primary-purple;
+            background-color: rgb(32, 33, 44,100%);
             border-radius: 10px;
             @include display( );
             img{
@@ -704,7 +778,6 @@ $components-background:rgba(14, 14, 29, 0.877);
         @include display($justify:unset );
         gap: 3px;
         img{
-            background-color: $primary-purple;
             border-radius: 10px;
             width: 28px;
             height:25x;
@@ -722,9 +795,9 @@ $components-background:rgba(14, 14, 29, 0.877);
             @extend %link-texts;
             width: 100%;
             height: 40px;
-            background-color: $header-backgroundColor;
+            background-color: transparent;
             outline: none;
-            border: .2px solid #c0bfbf;
+            border: .2px solid #eae4e4;
             border-radius: 15px;
             position: relative;
             z-index: 0;
@@ -733,4 +806,164 @@ $components-background:rgba(14, 14, 29, 0.877);
             }
         }
     }
+}
+
+
+
+
+//Tasks Section
+
+h3{
+    @extend %link-texts;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: -25px;
+}
+
+h4{
+    @include display($align:unset,$justify:unset,$direction:column);
+    gap: 7px;
+}
+
+
+%task-complete{
+    padding-left: 13px;
+    @extend %link-texts;
+    width: 100%;
+    min-height: 60px;
+    background-color: rgb(32, 33, 44,100%);
+    outline: none;
+    border: .2px solid transparent;
+    border-radius: 15px;
+    position: relative;
+    z-index: 0;
+    @include display( $justify:unset);
+    // overflow-x: scroll;
+    overflow-x: auto;
+    gap:10px;
+    position: relative;
+}
+
+%task-input{
+    width: 18px;
+    height: 18px;
+    background-color: transparent;
+    accent-color: $primary-purple;
+    outline: 2px solid $primary-purple; 
+}
+
+%task-img{
+    bottom: 0;
+    position: absolute;
+    width: 20px;
+    height: 15px;
+    left: 12px;
+}
+
+.tasks{
+    @extend %task-complete;
+
+    input[type=checkbox]{
+     @extend %task-input;
+    }
+
+    span{
+        position: absolute;
+        right: 12px;
+    }
+
+    img{
+        @extend %task-img;
+    }
+}
+
+.complete{
+    @extend %task-complete;
+
+    input[type=checkbox]{
+        @extend %task-input;
+    }
+
+    span{
+        position: absolute;
+        right: 12px;
+    }
+
+
+    img{
+        @extend %task-img;
+    }
+}
+
+
+
+//Update Display
+
+// .disName{
+//     max-width: 760px;
+//     height: 350px;
+//     @include display($direction:column,$justify:unset);
+//     gap: 30px;
+// }
+
+.disName{
+    max-width: 760px;
+    height: 250px;
+    @include display($direction:column,$justify:unset);
+
+    h3{
+        font-size: 27px;
+        font-weight: 500;
+        color: $home-text-color;
+    }
+
+    .authenticate{
+        @include display($direction:column,$justify:space-around);
+        height: 200px;
+
+        %sign{
+            width: 220px;
+            height: 35px;
+            font-size: 12px;
+            background-color: $primary-purple;
+            border-radius: 6px;
+            @extend %transition;
+        }
+
+        #outlined-basic{
+            background-color: transparent;
+            border: 1px solid $home-text-color;
+            @extend %sign;
+            height: 5px;
+            width: 190px;
+            color: $home-text-color;
+            margin-bottom: -80px;
+
+            &::placeholder{
+                color: $home-text-color;
+            }
+
+            &:hover{
+                border: 1px solid $primary-purple;
+                background-color: transparent;
+            }
+
+            &:focus{
+                outline: 1px solid $primary-purple ;
+                border-radius: 5px;
+            }
+
+        }        
+        
+        Button{
+            @extend %link-texts;
+            @extend %sign;
+            text-transform: capitalize;
+            &:hover{
+                background-color: rgba(139, 49, 116, 0.625);
+            }
+        }
+        
+    }
+
 }

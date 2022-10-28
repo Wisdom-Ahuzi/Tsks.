@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import{v4 as uuidv4} from "uuid";
 import { display } from '@mui/system';
 
-const Account = ({logout,displayName,lmail,handleClose,closeId,extendId, side}) => {
+const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
 
   let navigate = useNavigate();
   useEffect(() => {
@@ -19,18 +19,22 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId, side}) 
   const accountDetails = [
     {
       text:"Display Name",
-      name:sessionStorage.getItem("Name"),
-      edit : "Edit"
+      name:disName,
+      edit : "Edit",
+      navigate: "/UpdateDisplayName"
     },
     {
       text:"Email",
       name:lmail,
-      edit : "Edit"
+      edit : "Edit",
+      navigate: "/UpdateEmail"
+
     },
     {
       text:"Password",
       name:".......",
-      edit : "Change"
+      edit : "Change",
+      navigate: "/UpdatePassword"
     }
   ] 
 
@@ -51,7 +55,7 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId, side}) 
 
             <div className='accountImage'>
               <img src={require("../assets/Desktop/profile.jpeg")} alt="" />
-              <p>{sessionStorage.getItem("Name")}</p>
+              <p>{disName}</p>
             </div>
 
             <div className="accountItems">
@@ -63,13 +67,28 @@ const Account = ({logout,displayName,lmail,handleClose,closeId,extendId, side}) 
                     <p>{account.name}</p>
                   </span>
 
-                  <NavLink to="" >
+                  <NavLink to={account.navigate} >
                     <Button className='edit' variant="contained">{account.edit}</Button>
                   </NavLink>
                 </div>
               )
             })}
 
+            </div>
+            <div className="pro">
+             <div className="first">
+              <span>
+                <p>Subscription</p>
+                <p>Tsks Free</p>
+              </span>
+
+              <NavLink to="/">
+                <Button variant="contained" title="subscribe" className='black' >Upgrade to Pro</Button>
+              </NavLink>
+             </div>
+            <div className="proBenefits">
+              <NavLink to="/">See the pro Benefits <img src={require("../assets/Desktop/goto.png")} alt="goto" /></NavLink>
+            </div>
             </div>
             <Button className='signOut' onClick={logout} variant="contained" title="Logout" >Sign Out</Button>
           </div>

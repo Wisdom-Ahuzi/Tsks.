@@ -21,7 +21,7 @@ const Header = ({logout,handleClose}) => {
         <Outlet/>
 
         <div className="headerTwo">
-            <NavLink to="/Account" className="acc"><img src={require("../assets/Desktop/back.png")} alt="My Account" title="My Account" /></NavLink>
+            <NavLink to="/Account" className="acc"><img src={require("../assets/Desktop/addTask.png")} alt="My Account" title="My Account" /></NavLink>
             <img src={require("../assets/Desktop/search.png")} alt="Search Icon" title='Search ' />
             <img onClick={logout} src={require("../assets/Desktop/logout.png")} alt="Logout" title="Logout" />
         </div>
