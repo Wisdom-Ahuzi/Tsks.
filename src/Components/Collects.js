@@ -1,17 +1,21 @@
 import { areArraysEqual } from '@mui/base';
-import {React, useRef, useState} from 'react';
+import {React, useMemo, useRef, useState} from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import{v4 as uuidv4} from "uuid";
+import { collection, addDoc } from "firebase/firestore"; 
 
 const Collects = ({title}) => {
 
+    const dates = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const date = new Date();
+    const day = dates[date.getUTCDay()];
 
     const[tasks,setTasks]=useState([]);
-    const[del,setDel] = useState("");
-    const[num,setNum] = useState(0);
-    const[undone,setUndone] = useState([]);
+    const[num,setNum] = useState(null);
+    const[undone,setundone] = useState([]);
     const[completed,setCompleted] = useState([]);
-    const[completedNum, setCompletedNum] = useState(0);
+    const[completedNum, setCompletedNum] = useState(null);
     const handleSubmit = (e) => {
         e.preventDefault();
         setTasks([...tasks,{name:taskRef.current.value}]);
@@ -26,29 +30,41 @@ const Collects = ({title}) => {
     }
 
     const handleDone = (task) => {
-    
         setNum(num-1);
         setCompletedNum(completedNum+1);
-        setNum(0);
-        setCompletedNum(0);
-
-
+        
        const filtered = tasks.filter((completedTask) => {
         if (task === completedTask) {
+            const indexArray = tasks.indexOf(completedTask);
+            tasks.splice(indexArray,1);
             return completedTask
-        }else{
-            // console.log(completedTask);
         }
        })
 
        filtered.forEach((fil) => {
             setCompleted([...completed,fil]);
-
        })
     }
 
 
+    const handleDeleteTask = (com) => {
+        setCompletedNum(completedNum-1);
+       completed.filter(potentialDelete => {
+            if (com === potentialDelete) {
+                const deleteIndex = completed.indexOf(potentialDelete);
+                return completed.splice(deleteIndex,1);
+            }
+        });
+    }
 
+
+    const handleReAddedTask = (com) => {
+        setNum(num + 1);
+        setCompletedNum(completedNum-1)
+        setTasks([...tasks,com])
+        const deleteIndex = completed.indexOf(com);
+        completed.splice(deleteIndex,1);
+    }
     
   return (
     <div className="innerSchool">
@@ -59,7 +75,7 @@ const Collects = ({title}) => {
             </span>
 
             <span>
-                <img src={require("../assets/Desktop/addTask.png")} alt="Add Tasks" title="Add Tasks" />
+                <img src={require("../assets/Desktop/addTask.png")} alt="Add Tasks" title="Add Tasks" onClick={handleSubmit} />
                 <form onSubmit={handleSubmit}>
                     <input type="text" ref={taskRef} placeholder='Add a Task'  onChange={(e) => {handleAddTask(e)}} />
                 </form>
@@ -73,7 +89,8 @@ const Collects = ({title}) => {
                     onChange={(e) => {handleDone(task)}}
                     id="" />
                     <p >{task.name}</p>
-                    <img src={require("../assets/Desktop/concept.png")} alt="" />
+                    <img src={require("../assets/Desktop/calendar.png")} alt="Date Added" title='Date Added' />
+                    <p>{day}</p>
                 </div>
             ))}
             </h4>
@@ -86,9 +103,13 @@ const Collects = ({title}) => {
                         <div key={uuidv4()} className="complete" >
                             <input 
                             type="checkbox"
-                            defaultChecked />
+                            defaultChecked
+                            onChange={() => handleReAddedTask(com)}
+                             />
                             <del >{com.name}</del>
-                            <img src={require("../assets/Desktop/concept.png")} alt="" />
+                            <img src={require("../assets/Desktop/calendar.png")} alt="Date Completed" title='Date Completed' />
+                            <p>{day}</p>
+                            <img onClick={() => {handleDeleteTask(com)}} src={require("../assets/Desktop/trash.png")} alt="" />
                         </div>
                     )
                 })

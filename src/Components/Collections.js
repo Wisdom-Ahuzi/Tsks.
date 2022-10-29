@@ -30,7 +30,6 @@ const Collections = ({logout,handleClose,closeId,extendId, side}) => {
                   <div className="collects">
                     <img src={item.image} alt={item.alt} />
                     <p>{item.text}</p>
-                    <img className='img' src={require("../assets/Desktop/con.png")} alt="" />
                   </div>
                 </NavLink>
               )

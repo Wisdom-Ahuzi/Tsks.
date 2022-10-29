@@ -47,6 +47,7 @@ const Dashboard = ({authentication,disName,email,password,logout,handleClose,clo
                             <img src={item.icon} alt="Goto Dashboard"  /> 
                             <p>{item.word}</p>
                         </div>
+                        
                         <div className="overviewLink">
                             <NavLink to={item.to}> Go to {item.word} <img src={require("../assets/Desktop/goto.png")} alt="GoTo" title="GoTo" /> </NavLink>
                         </div>

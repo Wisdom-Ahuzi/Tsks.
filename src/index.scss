@@ -40,10 +40,10 @@ $components-background:rgb(23, 24, 31, 100%);
     font-weight: 300;
 }
 
-.LandingPage{
+%home-error{
     width: 100%;
     height: 100vh;
-    background-image: url(./assets/Desktop/LandingPage.png);
+    background-image: url(./assets/Desktop/Error.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
@@ -54,6 +54,92 @@ $components-background:rgb(23, 24, 31, 100%);
     'div header divs'
     'div image divs';
     overflow-y: hidden;
+}
+
+.ErrorPage{
+   @extend %home-error;
+   
+   nav{
+    grid-area: nav;
+    @include display(space-between,center ,flex );
+
+    .error{
+        @include nav($nav-width:20%);
+        img{
+            width: 100px;
+            object-fit:cover;
+        }
+
+        a{
+            margin-top: 2px;
+            @extend %link-texts;
+        }
+    }
+
+    .errorTwo{
+        @include nav($nav-width:13%);
+
+        a{
+            @extend %link-texts;
+        }
+
+        span{
+            width: 70px;
+            height: 25px;
+            border-radius: 4px;
+            border: 1px solid $home-text-color;
+            @include display(center,center ,flex );
+            @extend %transition;
+            cursor: pointer;
+
+            a{
+                font-weight: 500;
+                font-size: 12px;
+            }
+
+            &:hover{
+                background-color: $primary-purple;
+            }
+        }
+    }
+   }
+
+   header{
+    margin-top: 200px;
+    grid-area: header;
+    @include display($direction:column);
+    gap: 20px;
+
+    h2{
+        @extend %link-texts;
+        font-size: 2.5rem;
+        font-weight: 500;
+    }
+
+    p{
+        @extend %link-texts;
+        max-width: 420px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .buttons{
+        a{
+            @extend %link-texts;
+            .purple{
+                background-color: $primary-purple;
+                font-size: 12px;
+                text-transform: capitalize
+            }
+        }
+    }
+   }
+}
+
+.LandingPage{
+    @extend %home-error;
+    background-image: url(./assets/Desktop/LandingPage.png);
 
 
     
@@ -69,9 +155,11 @@ $components-background:rgb(23, 24, 31, 100%);
     nav{
         grid-area: nav;
         @include display(space-between,center ,flex );
+
+        
     
         .navOne{
-            @include nav($nav-width:18%);
+            @include nav($nav-width:20%);
     
             img{
                 width: 100px;
@@ -294,7 +382,7 @@ $components-background:rgb(23, 24, 31, 100%);
 
 
 //Dashboard Component
-.Dashboard,.Account,.Collections,.Collects,.School,.Personal{
+.Dashboard,.Account,.Collections,.Collects,.School,.Design,.Work,.Personal{
     width: 100%;
     height: 100vh;
     display: grid;
@@ -640,7 +728,7 @@ $components-background:rgb(23, 24, 31, 100%);
 
         .overview{
             border-radius: 12px;
-            min-height: 170px;
+            min-height: 140px;
             background-color: rgb(32, 33, 44,100%);
             @include display($direction:column, $justify:space-between,$align:unset);
 
@@ -815,7 +903,7 @@ $components-background:rgb(23, 24, 31, 100%);
 
 h3{
     @extend %link-texts;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: -25px;
 }
@@ -837,27 +925,36 @@ h4{
     border-radius: 15px;
     position: relative;
     z-index: 0;
-    @include display( $justify:unset);
-    // overflow-x: scroll;
+    @include display( $justify:unset, $align:unset);
     overflow-x: auto;
     gap:10px;
     position: relative;
+    padding-top: 10px;
 }
 
 %task-input{
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     background-color: transparent;
     accent-color: $primary-purple;
     outline: 2px solid $primary-purple; 
 }
 
 %task-img{
-    bottom: 0;
+    bottom: 10px;
     position: absolute;
-    width: 20px;
-    height: 15px;
-    left: 12px;
+    width: 14px;
+    height: 14px;
+    left: 42px;
+}
+
+%date{
+    @extend %link-texts;
+    color: lightgreen;
+    font-size: 11px;
+    position: absolute;
+    bottom: 10px;
+    left: 62px;
 }
 
 .tasks{
@@ -867,13 +964,19 @@ h4{
      @extend %task-input;
     }
 
+    font-size: 13px;
+   
     span{
+        background-color: lavender;
         position: absolute;
         right: 12px;
     }
 
     img{
         @extend %task-img;
+    }
+    p:nth-of-type(2){
+        @extend %date;
     }
 }
 
@@ -889,9 +992,24 @@ h4{
         right: 12px;
     }
 
+    font-size: 13px;
+
 
     img{
         @extend %task-img;
+    }
+
+    p{        
+        @extend %date;
+    }
+
+    img:nth-of-type(2){
+        bottom: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 94%;
+        cursor: pointer;
     }
 }
 

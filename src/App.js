@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
   useNavigate
@@ -12,6 +11,7 @@ import Error from "./Components/Error";
 import Account from './Components/Account';
 import Collections from "./Components/Collections";
 import { firebaseApp } from "./Components/firebaseConfig";
+import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { useState,useEffect } from "react";
 import School from "./Components/School.js";
@@ -19,9 +19,13 @@ import Personal from "./Components/Personal";
 import UpdateDisplayName from "./Components/UpdateDisplayName";
 import UpdateEmail from "./Components/UpdateEmail";
 import UpdatePassword from "./Components/UpdatePassword";
+import Design from "./Components/Design";
+import Work from "./Components/Work";
+require("firebase/firestore");
 
 function App() {
   
+  const db = getFirestore(App);
   const authentication = getAuth();
   const navigate = useNavigate();
 
@@ -181,7 +185,7 @@ function App() {
     },
     {
         image:require("./assets/Desktop/grocery.png"),
-        text:"Grocery",
+        text:"Work",
         alt:"Grocery Image"
     }
 ]
@@ -215,6 +219,8 @@ function App() {
           <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="Design" element={<Design handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="Work" element={<Work handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName} handleUpdate = {handleUpdate}/>}></Route>
           <Route path="UpdateEmail" element={<UpdateEmail/>}></Route>
           <Route path="UpdatePassword" element={<UpdatePassword/>}></Route>
