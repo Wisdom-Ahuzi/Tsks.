@@ -1,6 +1,6 @@
 import React from 'react'
 import { initializeApp } from "firebase/app";
-
+import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -13,5 +13,6 @@ const firebaseConfig = {
     measurementId: "G-75RYW131M6"
   };
 
+const app = initializeApp(firebaseConfig);
 
-export default initializeApp(firebaseConfig);
+export const db = getFirestore(app);

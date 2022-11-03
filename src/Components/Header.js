@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 const Header = ({logout,handleClose}) => {
 
 
+
   return (
     <div className='Header'>
         <div className="headerOne">
@@ -14,15 +15,14 @@ const Header = ({logout,handleClose}) => {
                 <NavLink to="/Dashboard">Dashboard</NavLink>
             </li>
             <li className="collectionHeader">
-                    <NavLink to="/Collections"><img src={require("../assets/Desktop/collections.png")} alt="Collections Icon" title="Collections Icon" /></NavLink>
-                    <NavLink to="/Collections">Collections</NavLink>
+              <NavLink to="/Collections"><img src={require("../assets/Desktop/collections.png")} alt="Collections Icon" title="Collections Icon" /></NavLink>
+              <NavLink to="/Collections">Collections</NavLink>
             </li>
         </div>
         <Outlet/>
 
         <div className="headerTwo">
             <NavLink to="/Account" className="acc"><img src={require("../assets/Desktop/addTask.png")} alt="My Account" title="My Account" /></NavLink>
-            <img src={require("../assets/Desktop/search.png")} alt="Search Icon" title='Search ' />
             <img onClick={logout} src={require("../assets/Desktop/logout.png")} alt="Logout" title="Logout" />
         </div>
     </div>

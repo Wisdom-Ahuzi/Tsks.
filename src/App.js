@@ -11,7 +11,6 @@ import Error from "./Components/Error";
 import Account from './Components/Account';
 import Collections from "./Components/Collections";
 import { firebaseApp } from "./Components/firebaseConfig";
-import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { useState,useEffect } from "react";
 import School from "./Components/School.js";
@@ -21,11 +20,9 @@ import UpdateEmail from "./Components/UpdateEmail";
 import UpdatePassword from "./Components/UpdatePassword";
 import Design from "./Components/Design";
 import Work from "./Components/Work";
-require("firebase/firestore");
 
 function App() {
-  
-  const db = getFirestore(App);
+
   const authentication = getAuth();
   const navigate = useNavigate();
 
@@ -42,8 +39,8 @@ function App() {
   const[password,setPassword] = useState(" ");
   const[name,setName] = useState("");
 
-  //Errors in signing up or logging in
   
+  //Errors in signing up or logging in
   const[errors,setErrors] = useState({
     emailError:"",
     passwordError:"",
@@ -64,22 +61,15 @@ function App() {
         updateProfile(authentication.currentUser, {
           displayName: name
         }).then(() => {
-          // Profile updated!
-          // ...
           sessionStorage.setItem("Name" , name);
-          // sessionStorage.setItem("Password" , password);
-          // sessionStorage.setItem("Email" , email);
 
         }).catch((error) => {
-          // An error occurred
-          // ...
           console.log("Unable to update name");
         });
 
       })      
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
-          // toast.error('Email Already in Use');
           setErrors((prev) => {
             return{...prev,emailInUse:"Email Already In Use"}
           })
@@ -102,12 +92,7 @@ function App() {
           updateProfile(authentication.currentUser, {
             displayName: name
           }).then(() => {
-            // Profile updated!
-            // ...
-            
           }).catch((error) => {
-            // An error occurred
-            // ...
             console.log("Unable to update name");
           });
         })
@@ -138,10 +123,8 @@ function App() {
   let displayName;
   let lmail;
   if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
     displayName = user.displayName;
     lmail = user.email;
-
   }
 
   //Log Out
@@ -171,22 +154,26 @@ function App() {
     {
         image:require("./assets/Desktop/school.png"),
         text:"School",
-        alt:"School Image"
+        alt:"School Image",
+        title:"School "
     },
     {
         image:require("./assets/Desktop/personal.png"),
         text:"Personal",
-        alt:"Personal Image"
+        alt:"Personal Image",
+        title:"Personal "
     },
     {
         image:require("./assets/Desktop/design.png"),
         text:"Design",
-        alt:"Design Image"
+        alt:"Design Image",
+        title:"Design "
     },
     {
         image:require("./assets/Desktop/grocery.png"),
         text:"Work",
-        alt:"Grocery Image"
+        alt:"Grocery Image",
+        title:"Grocery "
     }
 ]
 

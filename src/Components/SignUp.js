@@ -11,7 +11,7 @@ const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
             <h3>Sign up.</h3>
             <div className="authenticate">   
                 <TextField
-                  id="outlined-password-input"
+                  id="outlined-name-input"
                   type="text"
                   placeholder='Display Name'
                   onChange={(e) => setName(e.target.value)}

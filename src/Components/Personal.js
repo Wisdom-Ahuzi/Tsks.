@@ -22,7 +22,7 @@ const Personal = ({logout,handleClose,closeId,extendId, side}) => {
     <div className='Personal' id={extendId}>
         <Header logout={logout} handleClose = {handleClose}/>
         <Sidebar closeId= {closeId} side = {side}/>
-        <Collects title = {"Personal"}/>
+        <Collects title = {"Personal"} General = {"General"} Completed = {"Completed"}/>
     </div>
   )
 }

@@ -21,7 +21,7 @@ const School = ({logout,handleClose,closeId,extendId, side}) => {
     <div className='School' id={extendId}>
         <Header logout={logout} handleClose = {handleClose}/>
         <Sidebar closeId= {closeId} side = {side}/>
-        <Collects title = {"School"} />
+        <Collects title = {"School"} General = {"SchoolGeneral"} Completed = {"SchoolCompleted"}/>
     </div>
   )
 }

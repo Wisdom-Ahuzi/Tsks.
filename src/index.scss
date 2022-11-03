@@ -38,6 +38,7 @@ $components-background:rgb(23, 24, 31, 100%);
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    transition: all .5s ease;
 }
 
 %home-error{
@@ -316,7 +317,7 @@ $components-background:rgb(23, 24, 31, 100%);
                 @extend %transition;
             }
 
-            #outlined-basic, #outlined-password-input{
+            #outlined-basic, #outlined-password-input,#outlined-name-input{
                 background-color: transparent;
                 border: 1px solid $home-text-color;
                 @extend %sign;
@@ -442,7 +443,11 @@ $components-background:rgb(23, 24, 31, 100%);
         width: 20px;
         height: 20px;
     }
+
+
+
 }
+
 
 
 
@@ -844,7 +849,10 @@ $components-background:rgb(23, 24, 31, 100%);
     .schoolDets{
         @extend %innerComponentCover;
         width: 500px;
+        position: relative;
     }
+
+
 
     .schoolHeader{
         @extend %componentHeader;
@@ -859,6 +867,33 @@ $components-background:rgb(23, 24, 31, 100%);
                 height: 30px;
             }
         }
+
+        .searchInput{
+            height: 27px;
+            border: 2px solid $primary-purple;
+            border-radius: 5px;
+            background-color: $components-background;
+            color: white;
+            position: absolute;
+            top: 1px;
+            right: 5px;
+            padding-right: 25px;
+            &:focus{
+                outline: none;
+            }
+        }
+
+        #showsearch{
+            display: none;
+        }
+
+        .searchImage{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+        }
     }
 
     span:nth-of-type(2){
@@ -872,6 +907,7 @@ $components-background:rgb(23, 24, 31, 100%);
             position: absolute;
             z-index: 1;
             margin-left: 7px;
+            cursor: pointer;
         }
 
         form{

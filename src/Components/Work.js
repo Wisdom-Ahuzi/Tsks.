@@ -18,7 +18,7 @@ const Work = ({logout,handleClose,closeId,extendId, side}) => {
     <div className='Work' id={extendId}>
         <Header logout={logout} handleClose = {handleClose}/>
         <Sidebar closeId= {closeId} side = {side}/>
-        <Collects title = {"Work"}/>
+        <Collects title = {"Work"}  General = {"WorkGeneral"} Completed = {"WorkCompleted"}/>
     </div>
   )
 }
