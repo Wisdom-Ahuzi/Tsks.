@@ -64,7 +64,7 @@ function App() {
           sessionStorage.setItem("Name" , name);
 
         }).catch((error) => {
-          console.log("Unable to update name");
+          console.log("Unable to update name",error);
         });
 
       })      

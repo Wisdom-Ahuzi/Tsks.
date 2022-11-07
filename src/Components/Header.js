@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink,useNavigate } from 'react-router-dom'
 import { Outlet } from "react-router-dom";
 
-const Header = ({logout,handleClose}) => {
+const Header = ({handleClose}) => {
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('Auth Token');
+    navigate('/LandingPage');
+    console.log("Logged Out");
+  }
 
 
   return (
@@ -23,7 +30,7 @@ const Header = ({logout,handleClose}) => {
 
         <div className="headerTwo">
             <NavLink to="/Account" className="acc"><img src={require("../assets/Desktop/addTask.png")} alt="My Account" title="My Account" /></NavLink>
-            <img onClick={logout} src={require("../assets/Desktop/logout.png")} alt="Logout" title="Logout" />
+            <img onClick={handleLogout} src={require("../assets/Desktop/logout.png")} alt="Logout" title="Logout" />
         </div>
     </div>
   )

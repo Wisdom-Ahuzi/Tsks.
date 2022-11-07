@@ -5,9 +5,14 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import{v4 as uuidv4} from "uuid";
 import { display } from '@mui/system';
+import { getStorage, ref } from "firebase/storage";
 
 const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
 
+
+  const storage = getStorage();
+  const storageRef = ref(storage);
+  const imagesRef = ref(storage, 'images');
   let navigate = useNavigate();
   useEffect(() => {
       let authToken = sessionStorage.getItem('Auth Token');
@@ -55,6 +60,8 @@ const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
 
             <div className='accountImage'>
               <img src={require("../assets/Desktop/profile.jpeg")} alt="" />
+              {/* <input type="file" name="" id=""  /> */}
+              {/* <button></button> */}
               <p>{disName}</p>
             </div>
 

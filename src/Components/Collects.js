@@ -2,8 +2,9 @@ import {React, useEffect, useRef, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import{v4 as uuidv4} from "uuid";
 import {db} from "../Components/firebaseConfig";
-import {query,collection, onSnapshot, addDoc, updateDoc,doc, deleteDoc} from "firebase/firestore";
+import {query,collection, onSnapshot, addDoc, updateDoc,doc, deleteDoc, where} from "firebase/firestore";
 import { async } from '@firebase/util';
+import { getAuth } from 'firebase/auth';
 
 const Collects = ({title, General, Completed }) => {
 
@@ -14,20 +15,23 @@ const Collects = ({title, General, Completed }) => {
 
     const[tasks,setTasks]=useState([]);
     const[completed,setCompleted] = useState([]);
-    const[num,setNum] = useState(1);
-    const[completedNum, setCompletedNum] = useState(1);
+    const[num,setNum] = useState(0);
+    const[completedNum, setCompletedNum] = useState(0);
     const taskRef = useRef(null);
+    const [valid,setValid] = useState("Add a Task");
+    const authentication = getAuth();
+
 
 
     const handleReAddedTask = async (com) => {
-        await deleteDoc(doc(db, Completed,com.id)); 
+        await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
 
-        await addDoc(collection(db,General), {
+        await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
             text:com.text.text,
-            completed:false,
+            day:day
         })
-        setCompletedNum(completed.length);
-        setNum(tasks.length);
+        setCompletedNum(completed.length  + 1);
+        setNum(tasks.length + 1);
     }
     
     const[searchValue,setSearchValue] = useState("");
@@ -43,7 +47,7 @@ const Collects = ({title, General, Completed }) => {
     }
 
     useEffect(() => {
-        const q = query(collection(db,General));
+        const q = query(collection(db,`${authentication.currentUser.uid}-${General}`));
         const unSubscribe = onSnapshot(q,(querySnapshot) => {
             let todoArr = [];
             querySnapshot.forEach(doc => {
@@ -56,34 +60,34 @@ const Collects = ({title, General, Completed }) => {
 
 
     const handleDone = async (task,id) => {
-       await updateDoc(doc(db, General, task.id), {
-        completed: !task.completed,
-       })
+    //    await updateDoc(doc(db, `${authentication.currentUser.uid}-${General}`, task.id), {
+    //     completed: !task.completed,
+    //    })
 
-        await deleteDoc(doc(db, General,id)); 
+        await deleteDoc(doc(db, `${authentication.currentUser.uid}-${General}`,id)); 
 
        tasks.forEach(async one => {
         if (one == task) {
             setCompleted([...completed,one]);
-            await addDoc(collection(db,Completed), {
+            await addDoc(collection(db,`${authentication.currentUser.uid}-${Completed}`), {
                 text:one,
-                // completed:true,
+                day:day
             })
         }
         })
 
-        setCompletedNum(completed.length);
-        setNum(tasks.length);
+        setCompletedNum(completed.length + 1);
+        setNum(tasks.length + 1);
     }
  
     const handleDeleteTask = async (id) => {
-        await deleteDoc(doc(db, Completed,id)); 
-        setCompletedNum(completed.length);
-        setNum(tasks.length);
+        await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,id)); 
+        setCompletedNum(completed.length + 1);
+        setNum(tasks.length + 1);
     }
 
     useEffect(() => {
-        const q = query(collection(db,Completed));
+        const q = query(collection(db,`${authentication.currentUser.uid}-${Completed}`));
         const unSubscribeTwo= onSnapshot(q,(querySnapshot) => {
             let todoArrComplete = [];
             querySnapshot.forEach(doc => {
@@ -97,17 +101,20 @@ const Collects = ({title, General, Completed }) => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         if (taskRef.current.value === "") {
-            console.log("Enter a valid input");
+            setValid("Enter a valid input");
             return
+        }else{
+            setValid("Add a Task");
         }
 
-        await addDoc(collection(db,General), {
+
+        await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
             text:taskRef.current.value,
-            completed:false,
+            day:day
         })
 
-        setCompletedNum(completed.length);
-        setNum(tasks.length);       
+        setCompletedNum(completed.length + 1);
+        setNum(tasks.length + 1);       
         taskRef.current.value = "";
     } 
 
@@ -124,7 +131,7 @@ const Collects = ({title, General, Completed }) => {
             <span>
                 <img src={require("../assets/Desktop/addTask.png")} alt="Add Tasks" title="Add Tasks" onClick={handleSubmit} />
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" ref={taskRef} placeholder='Add a Task' />
+                    <input type="text" ref={taskRef} placeholder={valid} />
                 </form>
             </span>
             <h3>Tasks - {num}</h3>
@@ -134,11 +141,11 @@ const Collects = ({title, General, Completed }) => {
                     <input 
                     type="checkbox"
                     name=""
-                    onChange={(e) => {handleDone(task,task.id)}}
+                    onChange={() => {handleDone(task,task.id)}}
                     id="" />
                     <p >{task.text}</p>
                     <img src={require("../assets/Desktop/calendar.png")} alt="Date Added" title='Date Added' />
-                    <p>{day}</p>
+                    <p>{task.day}</p>
                 </div>
             ))}
             </h4>
@@ -146,8 +153,7 @@ const Collects = ({title, General, Completed }) => {
             <h3>Completed - {completedNum}</h3>
             <h4>
                {
-                completed.filter(comple => 
-                    comple.text.text.includes(searchValue)).map((com) => {
+                completed.map((com) => {
                     return(
                         <div key={uuidv4()} className="complete" >
                             <input 
@@ -164,6 +170,7 @@ const Collects = ({title, General, Completed }) => {
                 })
                }
             </h4>
+            
         </div>
     </div>
   )
