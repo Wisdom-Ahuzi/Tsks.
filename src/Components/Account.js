@@ -55,9 +55,7 @@ const Account = ({logout,disName,email,handleClose,closeId,extendId, side,name})
             </span>
 
             <div className='accountImage'>
-              <img src={require("../assets/Desktop/profile.jpeg")} alt="" />
-              {/* <input type="file" name="" id=""  /> */}
-              {/* <button></button> */}
+              <img src="https://wallpaper.dog/large/17058403.png" alt="" />
               <p>{name}</p>
             </div>
 
@@ -81,16 +79,16 @@ const Account = ({logout,disName,email,handleClose,closeId,extendId, side,name})
             <div className="pro">
              <div className="first">
               <span>
-                <p>Subscription</p>
-                <p>Tsks Free</p>
+                <p>Developer</p>
+                <p>Wisdom </p>
               </span>
 
-              <NavLink to="/">
-                <Button variant="contained" title="subscribe" className='black' >Upgrade to Pro</Button>
-              </NavLink>
+              <a href="https://github.com/Wizzy-05" target= "_blank" rel="noreferrer noopener">
+                <Button variant="contained" title="subscribe" className='black' >See Github</Button>
+              </a>
              </div>
             <div className="proBenefits">
-              <NavLink to="/">See the pro Benefits <img src={require("../assets/Desktop/goto.png")} alt="goto" /></NavLink>
+              <a href="https://github.com/Wizzy-05" target= "_blank" rel="noreferrer noopener">Visit the developer <img src={require("../assets/Desktop/goto.png")} alt="goto" /></a>
             </div>
             </div>
             <Button className='signOut' onClick={logout} variant="contained" title="Logout" >Sign Out</Button>
