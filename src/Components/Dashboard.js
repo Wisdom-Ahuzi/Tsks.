@@ -1,13 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
+import {db} from "../Components/firebaseConfig";
+import {query,collection, onSnapshot, addDoc, updateDoc,doc, deleteDoc, where} from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 
 
+const Dashboard = ({authentication,disName,email,password,logout,handleClose,closeId,extendId,side,name}) => {
 
-const Dashboard = ({authentication,disName,email,password,logout,handleClose,closeId,extendId,side}) => {
+
+    const authenticatio = getAuth();
+
+
+    const[dashSchool,setDashSchool] = useState([]);
+    const[dashDesign,setDashDesign] = useState([]);
+
+    useEffect(() => {
+        const q = query(collection(db,`${authenticatio.currentUser.uid}-SchoolGeneral`));
+        const unSubscribe = onSnapshot(q,(querySnapshot) => {
+            let todoArr = [];
+            querySnapshot.forEach(doc => {
+                todoArr.push({...doc.data(),id: doc.id})
+            });
+            setDashSchool(todoArr);
+        })
+        return () => unSubscribe() 
+    },[]);
+
+    useEffect(() => {
+        const q = query(collection(db,`${authenticatio.currentUser.uid}-DesignGeneral`));
+        const unSubscribe = onSnapshot(q,(querySnapshot) => {
+            let todoArr = [];
+            querySnapshot.forEach(doc => {
+                todoArr.push({...doc.data(),id: doc.id})
+            });
+            setDashDesign(todoArr);
+        })
+        return () => unSubscribe() 
+    },[]);
+
 
     let navigate = useNavigate();
     useEffect(() => {
@@ -21,15 +55,32 @@ const Dashboard = ({authentication,disName,email,password,logout,handleClose,clo
         {
             icon:require("../assets/Desktop/design.png"),
             word: "Design",
-            to:"/Design"
+            to:"/Design",
+            texts:dashDesign.map(dash => {
+                return(
+                    <div key={uuidv4()}>
+                        <p >{dash.text}</p>
+                        <span>{dash.day}</span>
+                    </div>
+                )
+            })
         },
         {
             icon:require("../assets/Desktop/school.png"),
             word: "School",
-            to:"/School"
+            to:"/School",
+            texts:dashSchool.map(dash => {
+                return(
+                    <div key={uuidv4()}>
+                        <p >{dash.text}</p>
+                        <span>{dash.day}</span>
+                    </div>
+                )
+            })
         }
         
     ]
+
 
   return (
     <div className='Dashboard' id={extendId}>    
@@ -38,7 +89,8 @@ const Dashboard = ({authentication,disName,email,password,logout,handleClose,clo
         <div className="innerDashboard">
            <div className="dashboardInfo">
                 <h4>Dashboard</h4>
-                <h2>Hey, <br /> {disName}</h2>
+                <h2>Hey, <br /> {name}</h2>
+                
                 <Button className='black' variant="contained">Daily Overview</Button>
                 {dashItems.map(item => {
                     return(
@@ -47,13 +99,17 @@ const Dashboard = ({authentication,disName,email,password,logout,handleClose,clo
                             <img src={item.icon} alt="Goto Dashboard"  /> 
                             <p>{item.word}</p>
                         </div>
-                        
+                        <div className="overviewBody">
+                            <span>{item.texts}</span>
+                        </div>
                         <div className="overviewLink">
                             <NavLink to={item.to}> Go to {item.word} <img src={require("../assets/Desktop/goto.png")} alt="GoTo" title="GoTo" /> </NavLink>
                         </div>
                     </div>
                     )
                 })}
+             
+
            </div>
         </div>
     </div>
