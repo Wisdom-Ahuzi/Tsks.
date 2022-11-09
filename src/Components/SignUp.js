@@ -34,7 +34,7 @@ const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
                     <Button className='black' variant="contained" onClick={handleSign}>Sign up</Button>
                 </NavLink>
             </div>
-            <p>Already have an account? <span> <NavLink to="/SignIn" >Sign In</NavLink> <br /> <br /> <NavLink to=""> Forgot Password?</NavLink></span></p>
+            <p>Already have an account? <span> <NavLink to="/SignIn" >Sign In</NavLink> <br /> <br /></span></p>
         </div>
     </div>
   )

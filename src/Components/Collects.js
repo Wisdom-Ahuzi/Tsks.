@@ -46,6 +46,7 @@ const Collects = ({title, General, Completed }) => {
         }
     }
 
+
     useEffect(() => {
         const q = query(collection(db,`${authentication.currentUser.uid}-${General}`));
         const unSubscribe = onSnapshot(q,(querySnapshot) => {
@@ -60,10 +61,6 @@ const Collects = ({title, General, Completed }) => {
 
 
     const handleDone = async (task,id) => {
-    //    await updateDoc(doc(db, `${authentication.currentUser.uid}-${General}`, task.id), {
-    //     completed: !task.completed,
-    //    })
-
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${General}`,id)); 
 
        tasks.forEach(async one => {

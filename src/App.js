@@ -20,6 +20,9 @@ import UpdateEmail from "./Components/UpdateEmail";
 import UpdatePassword from "./Components/UpdatePassword";
 import Design from "./Components/Design";
 import Work from "./Components/Work";
+import {db} from "./Components/firebaseConfig";
+import {setDoc,doc,serverTimestamp} from "firebase/firestore";
+
 
 function App() {
 
@@ -48,10 +51,10 @@ function App() {
   })
 
   //Login and sign up
-  const handleSign = (id) => {
+  const handleSign =  (id) => {
     if (id === 1) {
-      createUserWithEmailAndPassword(authentication, email, password)
-      .then((response) => {
+     createUserWithEmailAndPassword(authentication, email, password)
+      .then(async (response) => {
         sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
       
         navigate('./Dashboard');
@@ -60,12 +63,12 @@ function App() {
 
         updateProfile(authentication.currentUser, {
           displayName: name
-        }).then(() => {
-          sessionStorage.setItem("Name" , name);
+        })
 
-        }).catch((error) => {
-          console.log("Unable to update name",error);
-        });
+        name.timestamp = serverTimestamp();
+        email.timestamp = serverTimestamp();
+
+        await setDoc(doc(db,"users",name), authentication.currentUser.uid);
 
       })      
       .catch((error) => {
@@ -88,14 +91,9 @@ function App() {
         .then((response) => {
           navigate('/Dashboard');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
-
-          updateProfile(authentication.currentUser, {
-            displayName: name
-          }).then(() => {
-          }).catch((error) => {
-            console.log("Unable to update name");
-          });
-        })
+          console.log(authentication.currentUser);
+          setName(authentication.currentUser.displayName);
+         })
         .catch((error) => {
           if(error.code === 'auth/wrong-password'){
             setErrors((prev) => {
@@ -117,14 +115,6 @@ function App() {
           }
         });
     }
-  }
-
-  const user = authentication.currentUser;
-  let displayName;
-  let lmail;
-  if (user !== null) {
-    displayName = user.displayName;
-    lmail = user.email;
   }
 
   //Log Out
@@ -187,11 +177,15 @@ function App() {
     displayName: disName
     }).then(() => {
         navigate('/Account');
-        
+        console.log(auth.currentUser);
+        setName(disName);
     }).catch((error) => {
         console.log("error:",error);
     });
   }  
+
+
+
 
   return (
     <div className="App">
@@ -202,8 +196,8 @@ function App() {
           />
           <Route path="/" element={<LandingPage/>}></Route>
           <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication} disName = {disName}  logout = {handleLogout}/> }></Route>
-          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} disName = {disName}  lmail = {lmail}  logout = {handleLogout}/>}></Route>    
-          <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} name= {name} closeId= {closeId} extendId= {extendId} disName = {disName} email = {email}   logout = {handleLogout}/>}></Route>    
+          <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId}  extendId= {extendId}/>}></Route>    
           <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
           <Route path="Design" element={<Design handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    

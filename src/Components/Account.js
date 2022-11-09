@@ -7,12 +7,8 @@ import{v4 as uuidv4} from "uuid";
 import { display } from '@mui/system';
 import { getStorage, ref } from "firebase/storage";
 
-const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
+const Account = ({logout,disName,email,handleClose,closeId,extendId, side,name}) => {
 
-
-  const storage = getStorage();
-  const storageRef = ref(storage);
-  const imagesRef = ref(storage, 'images');
   let navigate = useNavigate();
   useEffect(() => {
       let authToken = sessionStorage.getItem('Auth Token');
@@ -24,13 +20,13 @@ const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
   const accountDetails = [
     {
       text:"Display Name",
-      name:disName,
+      name:name,
       edit : "Edit",
       navigate: "/UpdateDisplayName"
     },
     {
       text:"Email",
-      name:lmail,
+      name:email,
       edit : "Edit",
       navigate: "/UpdateEmail"
 
@@ -62,7 +58,7 @@ const Account = ({logout,disName,lmail,handleClose,closeId,extendId, side}) => {
               <img src={require("../assets/Desktop/profile.jpeg")} alt="" />
               {/* <input type="file" name="" id=""  /> */}
               {/* <button></button> */}
-              <p>{disName}</p>
+              <p>{name}</p>
             </div>
 
             <div className="accountItems">

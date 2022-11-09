@@ -975,7 +975,7 @@ body{
 
 .innerDashboard{
     @extend %componentCover;
-    
+    margin-bottom: 70px;
     .dashboardInfo{
         @extend %innerComponentCover;
 
@@ -997,7 +997,7 @@ body{
 
         .overview{
             border-radius: 12px;
-            min-height: 140px;
+            min-height: 150px;
             background-color: rgb(32, 33, 44,100%);
             @include display($direction:column, $justify:space-between,$align:unset);
 
@@ -1009,6 +1009,7 @@ body{
                 background-color: rgb(39, 40, 51, 100%);
                 @include display($justify:unset,$align:center);
                 gap: 10px;
+                margin-bottom: 5px;
                 padding-left: 10px;
                 img{
                     width: 26px;
@@ -1020,6 +1021,31 @@ body{
                 }
             }
 
+            .overviewBody{
+                padding-left: 15px;
+                height: 90px;
+                color: $home-text-color;
+
+                span{
+                    @include display($justify:unset,$align:start,$direction:column);
+                    gap: 15px;
+                    height: inherit;
+                    overflow-y: scroll;
+                    div{
+                        @include display($justify:unset,$align:start,$direction:column);
+                        gap: 2px;
+                        p{
+                            font-size: 13px;
+                            font-weight: 500;
+                        }
+        
+                        span{
+                            font-size: 11px;
+                            color: seagreen;
+                        }
+                    }
+                }
+            }
             .overviewLink{
                 border-top: .2px solid #c0bfbf;
                 height: 35px;
@@ -1521,8 +1547,6 @@ body{
             
         }
     }
-
-
 }
 
 
@@ -1700,4 +1724,8 @@ h4{
         
     }
 
+}
+
+.dashP{
+    color: white;
 }
