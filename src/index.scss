@@ -817,6 +817,7 @@ body{
                     width: 35px;
                     height: 30px;
                 }
+               
             }
 
             p{
@@ -832,6 +833,19 @@ body{
                 height: 60px;
                 border-radius: 50%;
                 object-fit: cover;
+
+            }
+            span{
+                margin-top: 3px;
+                @include display( );
+                width: 50px;
+                height: 23px;
+                border: 2px solid $primary-purple;
+                border-radius: 4px;
+                p{
+                    font-size: 11px;
+                    text-transform: uppercase;
+                }
             }
 
             p{

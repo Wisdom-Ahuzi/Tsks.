@@ -1,13 +1,11 @@
-import React, { useState,useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import{v4 as uuidv4} from "uuid";
-import { display } from '@mui/system';
-import { getStorage, ref } from "firebase/storage";
 
-const Account = ({logout,disName,email,handleClose,closeId,extendId, side,name}) => {
+const Account = ({logout,email,handleClose,closeId,extendId, side,name}) => {
 
   let navigate = useNavigate();
   useEffect(() => {
@@ -56,7 +54,12 @@ const Account = ({logout,disName,email,handleClose,closeId,extendId, side,name})
 
             <div className='accountImage'>
               <img src="https://wallpaper.dog/large/17058403.png" alt="" />
+             <div>
               <p>{name}</p>
+                <span>
+                  <p>Free</p>
+                </span>
+             </div>
             </div>
 
             <div className="accountItems">
