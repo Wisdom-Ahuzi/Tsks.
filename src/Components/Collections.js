@@ -4,7 +4,6 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
-import { tab } from '@testing-library/user-event/dist/tab';
 
 
 const Collections = ({logout,handleClose,closeId,extendId, side}) => {

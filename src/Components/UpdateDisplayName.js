@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { getAuth, updateProfile } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const UpdateAccount = ({setDisName,handleUpdate,disName,setName}) => {
 
@@ -14,21 +13,6 @@ const UpdateAccount = ({setDisName,handleUpdate,disName,setName}) => {
     },[]);
 
     let navigate = useNavigate();
-
-    // const [disName,setDisName] = useState("");
-
-    // const handleUpdate = () =>{
-
-    //     const auth = getAuth();
-    //     updateProfile(auth.currentUser, {
-    //     displayName: disName
-    //     }).then(() => {
-    //         navigate('/Account');
-            
-    //     }).catch((error) => {
-    //         console.log("error:",error);
-    //     });
-    // }   
 
     console.log(disName);
   return (

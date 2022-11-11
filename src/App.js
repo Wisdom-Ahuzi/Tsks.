@@ -35,7 +35,7 @@ function App() {
     if (!authToken) {
       navigate('/LandingPage')
     }
-  }, [])
+  },[])
 
 
   const[email,setEmail] = useState("");

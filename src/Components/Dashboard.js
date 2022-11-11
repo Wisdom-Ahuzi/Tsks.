@@ -5,11 +5,11 @@ import Sidebar from './Sidebar';
 import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import {db} from "../Components/firebaseConfig";
-import {query,collection, onSnapshot, addDoc, updateDoc,doc, deleteDoc, where} from "firebase/firestore";
+import {query,collection, onSnapshot} from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 
 
-const Dashboard = ({authentication,disName,email,password,logout,handleClose,closeId,extendId,side,name}) => {
+const Dashboard = ({logout,handleClose,closeId,extendId,side,name}) => {
 
 
     const authenticatio = getAuth();

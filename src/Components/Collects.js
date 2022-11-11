@@ -2,8 +2,7 @@ import {React, useEffect, useRef, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import{v4 as uuidv4} from "uuid";
 import {db} from "../Components/firebaseConfig";
-import {query,collection, onSnapshot, addDoc, updateDoc,doc, deleteDoc, where} from "firebase/firestore";
-import { async } from '@firebase/util';
+import {query,collection, onSnapshot, addDoc,doc, deleteDoc} from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 
 const Collects = ({title, General, Completed }) => {
