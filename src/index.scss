@@ -1044,6 +1044,20 @@ body{
                     gap: 15px;
                     height: inherit;
                     overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        width: 4px;
+                        height: 10px;
+                    }
+                    
+                    &::-webkit-scrollbar-track {
+                        border-radius: 10px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                        background: gray;
+                        border-radius: 10px;
+                    }
+  
                     div{
                         @include display($justify:unset,$align:start,$direction:column);
                         gap: 2px;
@@ -1182,6 +1196,7 @@ body{
             top: 1px;
             right: 5px;
             visibility: 0%;
+            padding-left: 7px;
             padding-right: 25px;
             &:focus{
                 outline: none;
@@ -1236,6 +1251,195 @@ body{
         }
     }
 }
+
+
+
+
+
+
+//Tasks Section
+h3{
+    @extend %link-texts;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: -25px;
+}
+
+h4{
+    @include display($align:unset,$justify:unset,$direction:column);
+    gap: 7px;
+}
+
+
+%task-complete{
+    padding-left: 13px;
+    @extend %link-texts;
+    width: 100%;
+    min-height: 60px;
+    background-color: rgb(32, 33, 44,100%);
+    outline: none;
+    border: .2px solid transparent;
+    border-radius: 15px;
+    position: relative;
+    z-index: 0;
+    @include display( $justify:unset, $align:unset);
+    overflow-x: auto;
+    gap:10px;
+    position: relative;
+    padding-top: 10px;
+}
+
+%task-input{
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+    accent-color: $primary-purple;
+    outline: 2px solid $primary-purple; 
+}
+
+%task-img{
+    bottom: 10px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 42px;
+}
+
+%date{
+    @extend %link-texts;
+    color: lightgreen;
+    font-size: 11px;
+    position: absolute;
+    bottom: 10px;
+    left: 62px;
+}
+
+.tasks{
+    @extend %task-complete;
+
+    input[type=checkbox]{
+     @extend %task-input;
+    }
+
+    font-size: 13px;
+   
+    span{
+        background-color: lavender;
+        position: absolute;
+        right: 12px;
+    }
+
+    img{
+        @extend %task-img;
+    }
+    p:nth-of-type(2){
+        @extend %date;
+    }
+}
+
+.complete{
+    @extend %task-complete;
+
+    input[type=checkbox]{
+        @extend %task-input;
+    }
+
+    span{
+        position: absolute;
+        right: 12px;
+    }
+
+    font-size: 13px;
+
+
+    img{
+        @extend %task-img;
+    }
+
+    p{        
+        @extend %date;
+    }
+
+    img:nth-of-type(2){
+        bottom: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 94%;
+        cursor: pointer;
+    }
+}
+
+
+.disName{
+    max-width: 760px;
+    height: 250px;
+    @include display($direction:column,$justify:unset);
+
+    h3{
+        font-size: 27px;
+        font-weight: 500;
+        color: $home-text-color;
+    }
+
+    .authenticate{
+        @include display($direction:column,$justify:space-around);
+        height: 200px;
+
+        %sign{
+            width: 220px;
+            height: 35px;
+            font-size: 12px;
+            background-color: $primary-purple;
+            border-radius: 6px;
+            @extend %transition;
+        }
+
+        #outlined-basic{
+            background-color: transparent;
+            border: 1px solid $home-text-color;
+            @extend %sign;
+            height: 5px;
+            width: 190px;
+            color: $home-text-color;
+            margin-bottom: -80px;
+
+            &::placeholder{
+                color: $home-text-color;
+            }
+
+            &:hover{
+                border: 1px solid $primary-purple;
+                background-color: transparent;
+            }
+
+            &:focus{
+                outline: 1px solid $primary-purple ;
+                border-radius: 5px;
+            }
+
+        }        
+        
+        Button{
+            @extend %link-texts;
+            @extend %sign;
+            text-transform: capitalize;
+            &:hover{
+                background-color: rgba(139, 49, 116, 0.625);
+            }
+        }
+        
+    }
+
+}
+
+.dashP{
+    color: white;
+}
+
+
+
+
 
 
 
@@ -1509,10 +1713,9 @@ body{
             width: 23px;
             height: 23px;
         }
-    
-    
-    
     }
+
+
 
     .myAccount{
         
@@ -1560,185 +1763,22 @@ body{
             
         }
     }
-}
 
 
-//Tasks Section
-h3{
-    @extend %link-texts;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: -25px;
-}
-
-h4{
-    @include display($align:unset,$justify:unset,$direction:column);
-    gap: 7px;
-}
-
-
-%task-complete{
-    padding-left: 13px;
-    @extend %link-texts;
-    width: 100%;
-    min-height: 60px;
-    background-color: rgb(32, 33, 44,100%);
-    outline: none;
-    border: .2px solid transparent;
-    border-radius: 15px;
-    position: relative;
-    z-index: 0;
-    @include display( $justify:unset, $align:unset);
-    overflow-x: auto;
-    gap:10px;
-    position: relative;
-    padding-top: 10px;
-}
-
-%task-input{
-    width: 14px;
-    height: 14px;
-    background-color: transparent;
-    accent-color: $primary-purple;
-    outline: 2px solid $primary-purple; 
-}
-
-%task-img{
-    bottom: 10px;
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    left: 42px;
-}
-
-%date{
-    @extend %link-texts;
-    color: lightgreen;
-    font-size: 11px;
-    position: absolute;
-    bottom: 10px;
-    left: 62px;
-}
-
-.tasks{
-    @extend %task-complete;
-
-    input[type=checkbox]{
-     @extend %task-input;
+    .searchInput{
+        width: 130px;
+        border-radius: 21px !important;
+        padding-left: 12px;
     }
 
-    font-size: 13px;
-   
-    span{
-        background-color: lavender;
-        position: absolute;
-        right: 12px;
+    .searchImage{
+        width: 15px !important;
+        height: 15px !important;
     }
 
-    img{
-        @extend %task-img;
+    .complete img:nth-of-type(2) {
+        left: 90%;
+        width: 18px;
+        height: 18px;
     }
-    p:nth-of-type(2){
-        @extend %date;
-    }
-}
-
-.complete{
-    @extend %task-complete;
-
-    input[type=checkbox]{
-        @extend %task-input;
-    }
-
-    span{
-        position: absolute;
-        right: 12px;
-    }
-
-    font-size: 13px;
-
-
-    img{
-        @extend %task-img;
-    }
-
-    p{        
-        @extend %date;
-    }
-
-    img:nth-of-type(2){
-        bottom: 20px;
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 94%;
-        cursor: pointer;
-    }
-}
-
-
-.disName{
-    max-width: 760px;
-    height: 250px;
-    @include display($direction:column,$justify:unset);
-
-    h3{
-        font-size: 27px;
-        font-weight: 500;
-        color: $home-text-color;
-    }
-
-    .authenticate{
-        @include display($direction:column,$justify:space-around);
-        height: 200px;
-
-        %sign{
-            width: 220px;
-            height: 35px;
-            font-size: 12px;
-            background-color: $primary-purple;
-            border-radius: 6px;
-            @extend %transition;
-        }
-
-        #outlined-basic{
-            background-color: transparent;
-            border: 1px solid $home-text-color;
-            @extend %sign;
-            height: 5px;
-            width: 190px;
-            color: $home-text-color;
-            margin-bottom: -80px;
-
-            &::placeholder{
-                color: $home-text-color;
-            }
-
-            &:hover{
-                border: 1px solid $primary-purple;
-                background-color: transparent;
-            }
-
-            &:focus{
-                outline: 1px solid $primary-purple ;
-                border-radius: 5px;
-            }
-
-        }        
-        
-        Button{
-            @extend %link-texts;
-            @extend %sign;
-            text-transform: capitalize;
-            &:hover{
-                background-color: rgba(139, 49, 116, 0.625);
-            }
-        }
-        
-    }
-
-}
-
-.dashP{
-    color: white;
 }
