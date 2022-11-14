@@ -10,13 +10,14 @@ const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
   return (
     <div className='Sign'>
         <div className="signIn">
-            <h3>Sign in.</h3>
+            <h3>Welcome back</h3>
+            <h5>Welcome back! please fill in your details.</h5>
             <div className="authenticate">   
                 <TextField
                   id="outlined-basic" 
                   placeholder="Email"
                   type="Email"
-                  variant="outlined" 
+                  variant="standard"
                   onChange = { (e)  =>  setEmail(e.target.value)}
                 />
                 <TextField
@@ -24,16 +25,17 @@ const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
                   type="password"
                   placeholder='Password'
                   autoComplete="current-password"
+                  variant="standard"
                   onChange={(e) => setPassword(e.target.value)}
-                /> 
+                />
                   <span className='loginErrors'>{errors.emailError}</span> 
                   <span className='loginErrors'>{errors.passwordError}</span>
               
                 <NavLink to="" >
-                    <Button className='black' variant="contained" onClick={handleSign}>Sign in</Button>
+                    <Button className='black' variant="contained" onClick={handleSign}>Log in</Button>
                 </NavLink>
             </div>
-            <p>Don't have an account? <span> <NavLink to="/SignUp" >Create Account</NavLink></span></p>
+            <p>Don't have an account? <span> <NavLink to="/SignUp" >Sign up for free</NavLink></span></p>
         </div>
     </div>
   )

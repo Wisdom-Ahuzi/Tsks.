@@ -8,18 +8,20 @@ const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
   return (
     <div className='Sign'>
         <div className="signIn">
-            <h3>Sign up.</h3>
+            <h3>Create an account</h3>
+            <h5>Let's get you started on your free account.</h5>
             <div className="authenticate">   
                 <TextField
                   id="outlined-name-input"
                   type="text"
-                  placeholder='Display Name'
+                  variant="standard" 
+                  placeholder='Name'
                   onChange={(e) => setName(e.target.value)}
                 />   
                 <TextField 
                  id="outlined-basic" 
                  placeholder="Email" 
-                 variant="outlined" 
+                 variant="standard" 
                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
@@ -27,6 +29,7 @@ const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
                   type="password"
                   placeholder='Password'
                   autoComplete="current-password"
+                  variant="standard" 
                   onChange={(e) => setPassword(e.target.value)}
                 />
                   <span className='loginErrors'>{errors.emailInUse}</span>
@@ -34,7 +37,7 @@ const SignUp = ({setName,setEmail, setPassword,handleSign,errors }) => {
                     <Button className='black' variant="contained" onClick={handleSign}>Sign up</Button>
                 </NavLink>
             </div>
-            <p>Already have an account? <span> <NavLink to="/SignIn" >Sign In</NavLink> <br /> <br /></span></p>
+            <p>Already have an account? <span> <NavLink to="/SignIn" >Log in</NavLink> <br /> <br /></span></p>
         </div>
     </div>
   )
