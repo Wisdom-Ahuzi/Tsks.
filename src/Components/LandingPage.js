@@ -3,28 +3,28 @@ import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 import {v4 as uuidv4} from "uuid";
 
-const LandingPage = (handleSign) => {
+const LandingPage = () => {
 
   const tsksPeople = [
     {
       image:require("../assets/Mobile/back.png"),
       profession:"STUDENT",
-      text:"Take notes and write theses as you like with our tools designed for students. Study has never been so easy."
+      text:"Take notes and write theses as you like with our tools designed for students. Study tasks has never been easier to achieve."
     },
     {
       image:require("../assets/Mobile/teacher.png"),
       profession:"TEACHER",
-      text:"Add fun to your courseware. Collect student information and assign homework with ease."
+      text:"Add fun to your courseware. Collect student information and set a task to assign homework with ease."
     },
     {
       image:require("../assets/Mobile/businessuser.png"),
       profession:"BUSINESS USER",
-      text:"Make it easy to manage documents and files, take meeting minutes, and create roadshow presentations."
+      text:"Make it easy to manage documents and files, take meeting minutes, and create roadshow presentations later with WPS when the tasks has be completed."
     },
     {
       image:require("../assets/Mobile/finance.png"),
       profession:"FINANCE",
-      text:"Simplify the process of salary calculation, cost and profit analysis, and financial statements preparation."
+      text:"Simplify the process of salary calculation, cost and profit analysis, and financial statements preparation set a reminder for all that jazz with tsks."
     }
   ]
 
@@ -58,9 +58,9 @@ const LandingPage = (handleSign) => {
             <Button className='purple' variant="contained">Get Started</Button>
           </NavLink>
 
-          <NavLink to="" >
+          <a href="#people" >
             <Button className='black' variant="contained">Learn More</Button>
-          </NavLink>
+          </a>
         </div>
       </header>
 
@@ -74,14 +74,16 @@ const LandingPage = (handleSign) => {
           Whether you are in the office, school, or at home, TSKS can always meet your requirements for instant creativity and collaboration in daily-life scenarios. We will always help you convey passion, inspire innovation, and stand out among peers, whether you are a business professional or a student.
         </p>
 
-        <Button className='black' variant="contained" onClick={handleSign}>Explore Tsks</Button>
+        <NavLink to="/SignUp" style={{textDecoration:"none"}}>
+          <Button className='black' variant="contained">Explore Tsks</Button>
+        </NavLink>
 
       </div>
 
       <div className="tsksPeople" >
         {
           tsksPeople.map((career) => (
-            <div key={uuidv4()}>
+            <div key={uuidv4()} id="people">
               <img src={career.image} alt={career.profession} />
               <h4>{career.profession}</h4>
               <p>{career.text}</p>
@@ -94,9 +96,9 @@ const LandingPage = (handleSign) => {
           <div className="innerfoot">
             <img src={require("../assets/Desktop/Logo.png")} alt="" />
             <div className="socials">
-              <a href="/"><img src={require("../assets/Mobile/github.png")} alt="" /></a>
-              <a href="/"><img src={require("../assets/Mobile/twitter.png")} alt="" /></a>
-              <a href="/"><img src={require("../assets/Mobile/linkedin.png")} alt="" /></a>
+              <a href="https://github.com/Wizzy-05/" target="_blank"><img src={require("../assets/Mobile/github.png")} alt="github Icon" /></a>
+              <a href="https://twitter.com/ahuzi_wisdom" target="_blank"><img src={require("../assets/Mobile/twitter.png")} alt="" /></a>
+              <a href="https://www.linkedin.com/in/wisdom-ahuzi-71496523a/" target="_blank"><img src={require("../assets/Mobile/linkedin.png")} alt="" /></a>
           </div>
           </div>
         </footer>

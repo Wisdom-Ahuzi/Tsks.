@@ -1556,6 +1556,7 @@ h4{
         .LandingImage{
             img{
                 width: 90%;
+                height: 100%;
             }
         }
 
@@ -1576,6 +1577,8 @@ h4{
         }
 
         footer .innerfoot{
+            width: 85%;
+
             img {
                 height: 30px;
             }  
@@ -1599,15 +1602,24 @@ h4{
 @media screen and (max-width:375px) {
     %home-error{
         grid-template-columns: 20px 1fr 20px;
-        grid-template-rows: 80px 350px 1fr 400px 850px 80px;
+        grid-template-rows: 80px 350px 1fr 400px 950px 80px;
     }
     .LandingPage{
+        .expertise{
+            h2{
+                width: 80%;
+                font-size: 22px;
+                font-weight: 800;
+            }
+        }
         .tsksPeople{
             grid-template-columns: repeat(1, 1fr);
             div p {
                 width: 80%;
             }
         }
+
+        
     }
 }
 
