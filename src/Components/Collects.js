@@ -19,24 +19,22 @@ const Collects = ({title, General, Completed }) => {
     const taskRef = useRef(null);
     const [valid,setValid] = useState("Add a Task");
     const authentication = getAuth();
-
+    const[searchValue,setSearchValue] = useState("");
+    const[searchId,setSearchId] = useState("showsearch");
 
 
     const handleReAddedTask = async (com) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
+        setCompletedNum(completed.length - 1);
+        setNum(tasks.length + 1);
 
         await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
             text:com.text.text,
             day:day
         })
-        setCompletedNum(completed.length  + 1);
-        setNum(tasks.length + 1);
     }
     
-    const[searchValue,setSearchValue] = useState("");
-    const[searchId,setSearchId] = useState("showsearch");
 
-    
     const handleExtend = () =>{
         if (searchId === "") {
           setSearchId("showsearch");
@@ -62,6 +60,9 @@ const Collects = ({title, General, Completed }) => {
     const handleDone = async (task,id) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${General}`,id)); 
 
+        setCompletedNum(completed.length + 1);
+        setNum(tasks.length - 1);
+
        tasks.forEach(async one => {
         if (one == task) {
             setCompleted([...completed,one]);
@@ -72,14 +73,12 @@ const Collects = ({title, General, Completed }) => {
         }
         })
 
-        setCompletedNum(completed.length + 1);
-        setNum(tasks.length + 1);
+        
     }
  
     const handleDeleteTask = async (id) => {
+        setCompletedNum(completed.length - 1);
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,id)); 
-        setCompletedNum(completed.length + 1);
-        setNum(tasks.length + 1);
     }
 
     useEffect(() => {
@@ -103,14 +102,14 @@ const Collects = ({title, General, Completed }) => {
             setValid("Add a Task");
         }
 
+        setNum(tasks.length + 1);
 
         await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
-            text:taskRef.current.value,
+            text:taskRef.current.value.toLowerCase(),
             day:day
         })
 
-        setCompletedNum(completed.length + 1);
-        setNum(tasks.length + 1);       
+               
         taskRef.current.value = "";
     } 
 
@@ -131,7 +130,8 @@ const Collects = ({title, General, Completed }) => {
                 </form>
             </span>
             <h3>Tasks - {num}</h3>
-            <h4>{tasks.filter(user => 
+            <h4>
+                {tasks.filter(user => 
                 user.text.includes(searchValue)).map(task => (
                 <div key={uuidv4()} className="tasks">
                     <input 
