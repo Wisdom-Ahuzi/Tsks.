@@ -1,8 +1,3 @@
-
-tsksAccount# Tsks. Tsks...a web application that is used to keep track of daily tasks in life . 
-Get that satisfaction upon completion. Tsks was built using React, Sass and Google's Firebase.
-
-
 # Tsks - Task Tracker Web Application.
 
 ## Table of contents
@@ -24,7 +19,6 @@ Get that satisfaction upon completion. Tsks was built using React, Sass and Goog
 ### Screenshot
 <img width="1280" alt="tsksAccount" src="https://user-images.githubusercontent.com/93778975/201993010-8eb3ffbe-308b-43b2-a3e8-1070fd1a3055.png">
 <img width="1280" alt="S<img width="1280" alt="tsksHome" src="https://user-images.githubusercontent.com/93778975/201994887-30ff81f8-977f-4c96-8007-c884c18b6e7c.png">
-creenshot 2022-10-19 at 08 22 58" src="https://user-images.githubusercontent.com/93778975/201994868-3bca2d74-2591-4f41-8be3-fa3baa1b01d7.png">
 <img width="1280" alt="tsksCollections" src="https://user-images.githubusercontent.com/93778975/201994879-aa2841ba-86ad-4da3-95e5-2b0b2c7a9a58.png">
 
 
@@ -122,6 +116,6 @@ creenshot 2022-10-19 at 08 22 58" src="https://user-images.githubusercontent.com
 
 
 ## Acknowledgments
-I really appreciate Harry @AbidemiHarry.
+I really appreciate Harry @OpeAbidemi.
 
 
