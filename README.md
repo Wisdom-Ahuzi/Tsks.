@@ -17,9 +17,7 @@
 ### _Tsks...a web application that is used to keep track of daily tasks in life_. 
 
 ### Screenshot
-<img width="1280" alt="tsksAccount" src="https://user-images.githubusercontent.com/93778975/201993010-8eb3ffbe-308b-43b2-a3e8-1070fd1a3055.png">
-<img width="1280" alt="S<img width="1280" alt="tsksHome" src="https://user-images.githubusercontent.com/93778975/201994887-30ff81f8-977f-4c96-8007-c884c18b6e7c.png">
-<img width="1280" alt="tsksCollections" src="https://user-images.githubusercontent.com/93778975/201994879-aa2841ba-86ad-4da3-95e5-2b0b2c7a9a58.png">
+![712AA5DC-74EB-408E-B10F-3130307BDDB5_1_201_a](https://user-images.githubusercontent.com/93778975/204041029-e701d49d-b4ed-4a63-bf42-b3733ea83d53.jpeg)
 
 
 ### Links
