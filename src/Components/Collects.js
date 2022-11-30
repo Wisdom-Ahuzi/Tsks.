@@ -22,26 +22,17 @@ const Collects = ({title, General, Completed }) => {
     const[searchValue,setSearchValue] = useState("");
     const[searchId,setSearchId] = useState("showsearch");
 
-
-    const handleReAddedTask = async (com) => {
-        await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
-        setCompletedNum(completed.length - 1);
-        setNum(tasks.length + 1);
-
-        await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
-            text:com.text.text,
-            day:day
-        })
-    }
-    
-
-    const handleExtend = () =>{
-        if (searchId === "") {
-          setSearchId("showsearch");
-        }else{
-          setSearchId("");
-        }
-    }
+    useEffect(() => {
+        const q = query(collection(db, `${authentication.currentUser.uid}-${Completed}`));
+        const unSubscribeTwo = onSnapshot(q, (querySnapshot) => {
+            let todoArrComplete = [];
+            querySnapshot.forEach(doc => {
+                todoArrComplete.push({ ...doc.data(), id: doc.id });
+            });
+            setCompleted(todoArrComplete);
+        });
+        return () => unSubscribeTwo();
+    },[]);
 
 
     useEffect(() => {
@@ -57,13 +48,32 @@ const Collects = ({title, General, Completed }) => {
     },[]);
 
 
+    const handleReAddedTask = async (com) => {
+        await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
+        setCompletedNum(completed.length - 1);
+        setNum(tasks.length + 1);
+
+        await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
+            text:com.text.text,
+            day:day
+        })
+    }
+        
+    const handleExtend = () =>{
+        if (searchId === "") {
+            setSearchId("showsearch");
+        }else{
+            setSearchId("");
+        }
+    }
+    
     const handleDone = async (task,id) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${General}`,id)); 
 
         setCompletedNum(completed.length + 1);
         setNum(tasks.length - 1);
 
-       tasks.forEach(async one => {
+        tasks.forEach(async one => {
         if (one == task) {
             setCompleted([...completed,one]);
             await addDoc(collection(db,`${authentication.currentUser.uid}-${Completed}`), {
@@ -75,24 +85,12 @@ const Collects = ({title, General, Completed }) => {
 
         
     }
- 
+
     const handleDeleteTask = async (id) => {
         setCompletedNum(completed.length - 1);
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,id)); 
     }
-
-    useEffect(() => {
-        const q = query(collection(db,`${authentication.currentUser.uid}-${Completed}`));
-        const unSubscribeTwo= onSnapshot(q,(querySnapshot) => {
-            let todoArrComplete = [];
-            querySnapshot.forEach(doc => {
-                todoArrComplete.push({...doc.data(),id: doc.id})
-            });
-            setCompleted(todoArrComplete);
-        })
-        return () => unSubscribeTwo() 
-    },[]);
-
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
         if (taskRef.current.value === "") {
@@ -109,11 +107,11 @@ const Collects = ({title, General, Completed }) => {
             day:day
         })
 
-               
+                
         taskRef.current.value = "";
     } 
 
-  return (
+    return (
     <div className="innerSchool">
         <div className="schoolDets">
             <span className='schoolHeader'>
@@ -146,9 +144,10 @@ const Collects = ({title, General, Completed }) => {
             ))}
             </h4>
 
+
             <h3>Completed - {completedNum}</h3>
             <h4>
-               {
+            {
                 completed.map((com) => {
                     return(
                         <div key={uuidv4()} className="complete" >
@@ -156,7 +155,7 @@ const Collects = ({title, General, Completed }) => {
                             type="checkbox"
                             defaultChecked
                             onChange={() => handleReAddedTask(com)}
-                             />
+                            />
                             <del >{com.text.text}</del>
                             <img src={require("../assets/Desktop/calendar.png")} alt="Date Completed" title='Date Completed' />
                             <p>{day}</p>
@@ -164,9 +163,10 @@ const Collects = ({title, General, Completed }) => {
                         </div>
                     )
                 })
-               }
+            }
             </h4>
-            
+
+                        
         </div>
     </div>
   )

@@ -22,6 +22,8 @@ import Design from "./Components/Design";
 import Work from "./Components/Work";
 import {db} from "./Components/firebaseConfig";
 import {setDoc,doc,serverTimestamp} from "firebase/firestore";
+import Variant from "./Components/Variant";
+import House from "./Components/House";
 
 
 function App() {
@@ -37,12 +39,10 @@ function App() {
     }
   },[])
 
-
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState(" ");
   const[name,setName] = useState("");
 
-  
   //Errors in signing up or logging in
   const[errors,setErrors] = useState({
     emailError:"",
@@ -123,11 +123,9 @@ function App() {
     navigate('/LandingPage');
   }
 
-
   //Close and open Tab
   const[closeId,setCloseId] = useState("");
   const[extendId,setExtendId] = useState("");
-
   const handleClose = () => {
     if (closeId === "") {
       setCloseId("close");
@@ -138,7 +136,6 @@ function App() {
     }
   }
  
-
   //Collections
   const side = [
     {
@@ -164,13 +161,23 @@ function App() {
         text:"Work",
         alt:"Grocery Image",
         title:"Grocery "
+    },
+    {
+      image:require("./assets/Desktop/variant.png"),
+      text:"Variant",
+      alt:"Variant Image",
+      title:"Varient"
+    },
+    {
+      image:require("./assets/Desktop/house.png"),
+      text:"House",
+      alt:"House Image",
+      title:"House "
     }
-]
-
+  ]
 
   //Update Display Name
   const [disName,setDisName] = useState("");
-
   const handleUpdate = () =>{
     const auth = getAuth();
     updateProfile(auth.currentUser, {
@@ -184,33 +191,32 @@ function App() {
     });
   }  
 
-
-
-
-  return (
-    <div className="App">
-        <Routes>
-          <Route
-            path="*"
-            element={<Error/>}
-          />
-          <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication} disName = {disName}  logout = {handleLogout}/> }></Route>
-          <Route path="Account" element={<Account handleClose = {handleClose} side = {side} name= {name} closeId= {closeId} extendId= {extendId} disName = {disName} email = {email}   logout = {handleLogout}/>}></Route>    
-          <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId}  extendId= {extendId}/>}></Route>    
-          <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
-          <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
-          <Route path="Design" element={<Design handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
-          <Route path="Work" element={<Work handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
-          <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName} handleUpdate = {handleUpdate}/>}></Route>
-          <Route path="UpdateEmail" element={<UpdateEmail/>}></Route>
-          <Route path="UpdatePassword" element={<UpdatePassword/>}></Route>
-          <Route path="/LandingPage" element={<LandingPage/>} />
-          <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} email = {email} handleSign = {() => handleSign(2)}/>} ></Route>
-          <Route path="/SignUp" element={<SignUp setName = {setName} errors = {errors}  setEmail = {setEmail} setPassword = {setPassword} handleSign = {() => handleSign(1)}/>}></Route>
-        </Routes>
-    </div>
-  );
+    return (
+      <div className="App">
+          <Routes>
+            <Route
+              path="*"
+              element={<Error/>}
+            />
+            <Route path="/" element={<LandingPage/>}></Route>
+            <Route path="/Dashboard" element={<Dashboard handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId} name = {name} authentication = {authentication} disName = {disName}  logout = {handleLogout}/> }></Route>
+            <Route path="Account" element={<Account handleClose = {handleClose} side = {side} name= {name} closeId= {closeId} extendId= {extendId} disName = {disName} email = {email}   logout = {handleLogout}/>}></Route>    
+            <Route path="Collections" element={<Collections handleClose = {handleClose} side = {side} closeId= {closeId}  extendId= {extendId}/>}></Route>    
+            <Route path="School" element={<School handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+            <Route path="Personal" element={<Personal handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+            <Route path="Design" element={<Design handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+            <Route path="Variant" element={<Variant handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+            <Route path="House" element={<House handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>  
+            <Route path="Work" element={<Work handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
+            <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName} handleUpdate = {handleUpdate}/>}></Route>
+            <Route path="UpdateEmail" element={<UpdateEmail/>}></Route>
+            <Route path="UpdatePassword" element={<UpdatePassword/>}></Route>
+            <Route path="/LandingPage" element={<LandingPage/>} />
+            <Route path="/SignIn" element={<SignIn setEmail = {setEmail} errors = {errors} setPassword = {setPassword} email = {email} handleSign = {() => handleSign(2)}/>} ></Route>
+            <Route path="/SignUp" element={<SignUp setName = {setName} errors = {errors}  setEmail = {setEmail} setPassword = {setPassword} handleSign = {() => handleSign(1)}/>}></Route>
+          </Routes>
+      </div>
+    );
 }
 
 export default App;

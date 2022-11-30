@@ -39,6 +39,6 @@ const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
         </div>
     </div>
   )
-}
+  }
 
 export default SignIn
