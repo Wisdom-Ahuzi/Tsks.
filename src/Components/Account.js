@@ -18,13 +18,13 @@ const Account = ({logout,email,handleClose,closeId,extendId, side,name}) => {
   const accountDetails = [
     {
       text:"Display Name",
-      name:name,
+      name:sessionStorage.getItem("userDisplayName"),
       edit : "Edit",
       navigate: "/UpdateDisplayName"
     },
     {
       text:"Email",
-      name:email,
+      name:sessionStorage.getItem("userEmail"),
       edit : "Edit",
       navigate: "/UpdateEmail"
 
@@ -55,7 +55,7 @@ const Account = ({logout,email,handleClose,closeId,extendId, side,name}) => {
             <div className='accountImage'>
               <img src="https://wallpaper.dog/large/17058403.png" alt="" />
              <div>
-              <p>{name}</p>
+              <p>{sessionStorage.getItem("userDisplayName")}</p>
                 <span>
                   <p>Free</p>
                 </span>

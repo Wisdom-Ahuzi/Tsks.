@@ -19,7 +19,7 @@ const Dashboard = ({logout,handleClose,closeId,extendId,side,name}) => {
     const[dashDesign,setDashDesign] = useState([]);
 
     useEffect(() => {
-        const q = query(collection(db,`${authenticatio.currentUser.uid}-SchoolGeneral`));
+        const q = query(collection(db,`${sessionStorage.getItem("currentuserId")}-SchoolGeneral`));
         const unSubscribe = onSnapshot(q,(querySnapshot) => {
             let todoArr = [];
             querySnapshot.forEach(doc => {
@@ -31,7 +31,7 @@ const Dashboard = ({logout,handleClose,closeId,extendId,side,name}) => {
     },[]);
 
     useEffect(() => {
-        const q = query(collection(db,`${authenticatio.currentUser.uid}-DesignGeneral`));
+        const q = query(collection(db,`${sessionStorage.getItem("currentuserId")}-DesignGeneral`));
         const unSubscribe = onSnapshot(q,(querySnapshot) => {
             let todoArr = [];
             querySnapshot.forEach(doc => {
@@ -89,7 +89,7 @@ const Dashboard = ({logout,handleClose,closeId,extendId,side,name}) => {
         <div className="innerDashboard">
            <div className="dashboardInfo">
                 <h4>Dashboard</h4>
-                <h2>Hey, <br /> {name}</h2>
+                <h2>Hey, <br /> {sessionStorage.getItem("userDisplayName")}</h2>
                 
                 <Button className='black' variant="contained">Daily Overview</Button>
                 {dashItems.map(item => {

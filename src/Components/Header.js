@@ -8,8 +8,10 @@ const Header = ({handleClose}) => {
 
   const handleLogout = () => {
     sessionStorage.removeItem('Auth Token');
+    sessionStorage.removeItem('currentuserId');
+    sessionStorage.removeItem('userEmail');
+    sessionStorage.removeItem('userDisplayName');
     navigate('/LandingPage');
-    console.log("Logged Out");
   }
 
 

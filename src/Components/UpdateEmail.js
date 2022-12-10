@@ -20,7 +20,10 @@ const UpdateEmail = () => {
 
     const handleUpdateMail = () =>{
         const auth = getAuth();
-        updateEmail(auth.currentUser, updateMail).then(() => {
+        updateEmail(auth.currentUser, updateMail)
+        .then(() => {
+            sessionStorage.getItem("userEmail")
+            sessionStorage.setItem("userEmail",updateMail)
             navigate('/Account');
         }).catch((error) => {
             console.log("error mailUpdate:",error);

@@ -31,6 +31,7 @@ function App() {
   const authentication = getAuth();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
 
@@ -55,11 +56,14 @@ function App() {
     if (id === 1) {
      createUserWithEmailAndPassword(authentication, email, password)
       .then(async (response) => {
-        sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
-      
         navigate('./Dashboard');
+        sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
+        setName(authentication.currentUser.displayName);
+        sessionStorage.setItem("userDisplayName", authentication.currentUser.displayName);
+        sessionStorage.setItem("userEmail",email);
+        sessionStorage.setItem("currentuserId", authentication.currentUser.uid);
 
-        console.log(response);
+        // console.log(response);
 
         updateProfile(authentication.currentUser, {
           displayName: name
@@ -69,6 +73,7 @@ function App() {
         email.timestamp = serverTimestamp();
 
         await setDoc(doc(db,"users",name), authentication.currentUser.uid);
+        sessionStorage.setItem("currentuserId", authentication.currentUser.uid);
 
       })      
       .catch((error) => {
@@ -91,8 +96,10 @@ function App() {
         .then((response) => {
           navigate('/Dashboard');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
-          console.log(authentication.currentUser);
           setName(authentication.currentUser.displayName);
+          sessionStorage.setItem("userDisplayName", authentication.currentUser.displayName);
+          sessionStorage.setItem("userEmail",email);
+          sessionStorage.setItem("currentuserId", authentication.currentUser.uid);
          })
         .catch((error) => {
           if(error.code === 'auth/wrong-password'){
@@ -120,6 +127,9 @@ function App() {
   //Log Out
   const handleLogout = () => {
     sessionStorage.removeItem('Auth Token');
+    sessionStorage.removeItem('currentuserId');
+    sessionStorage.removeItem('userEmail');
+    sessionStorage.removeItem('userDisplayName');
     navigate('/LandingPage');
   }
 
@@ -178,14 +188,17 @@ function App() {
 
   //Update Display Name
   const [disName,setDisName] = useState("");
+
   const handleUpdate = () =>{
     const auth = getAuth();
     updateProfile(auth.currentUser, {
     displayName: disName
     }).then(() => {
-        navigate('/Account');
-        console.log(auth.currentUser);
-        setName(disName);
+      sessionStorage.getItem("userDisplayName")
+      sessionStorage.setItem("userDisplayName",disName)
+      navigate('/Account');
+      console.log(auth.currentUser);
+      setName(disName);
     }).catch((error) => {
         console.log("error:",error);
     });
@@ -208,7 +221,7 @@ function App() {
             <Route path="Variant" element={<Variant handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
             <Route path="House" element={<House handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>  
             <Route path="Work" element={<Work handleClose = {handleClose} side = {side} closeId= {closeId} extendId= {extendId}/>}></Route>    
-            <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName} handleUpdate = {handleUpdate}/>}></Route>
+            <Route path="UpdateDisplayName" element={<UpdateDisplayName setName = {setName} setDisName = {setDisName} disName = {disName}  handleUpdate = {handleUpdate}/>}></Route>
             <Route path="UpdateEmail" element={<UpdateEmail/>}></Route>
             <Route path="UpdatePassword" element={<UpdatePassword/>}></Route>
             <Route path="/LandingPage" element={<LandingPage/>} />

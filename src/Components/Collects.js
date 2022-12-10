@@ -22,8 +22,9 @@ const Collects = ({title, General, Completed }) => {
     const[searchValue,setSearchValue] = useState("");
     const[searchId,setSearchId] = useState("showsearch");
 
+
     useEffect(() => {
-        const q = query(collection(db, `${authentication.currentUser.uid}-${Completed}`));
+        const q = query(collection(db, `${sessionStorage.getItem("currentuserId")}-${Completed}`));
         const unSubscribeTwo = onSnapshot(q, (querySnapshot) => {
             let todoArrComplete = [];
             querySnapshot.forEach(doc => {
@@ -36,7 +37,7 @@ const Collects = ({title, General, Completed }) => {
 
 
     useEffect(() => {
-        const q = query(collection(db,`${authentication.currentUser.uid}-${General}`));
+        const q = query(collection(db,`${sessionStorage.getItem("currentuserId")}-${General}`));
         const unSubscribe = onSnapshot(q,(querySnapshot) => {
             let todoArr = [];
             querySnapshot.forEach(doc => {
@@ -46,7 +47,6 @@ const Collects = ({title, General, Completed }) => {
         })
         return () => unSubscribe() 
     },[]);
-
 
     const handleReAddedTask = async (com) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
