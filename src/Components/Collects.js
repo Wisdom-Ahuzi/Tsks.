@@ -14,8 +14,6 @@ const Collects = ({title, General, Completed }) => {
 
     const[tasks,setTasks]=useState([]);
     const[completed,setCompleted] = useState([]);
-    const[num,setNum] = useState(0);
-    const[completedNum, setCompletedNum] = useState(0);
     const taskRef = useRef(null);
     const [valid,setValid] = useState("Add a Task");
     const authentication = getAuth();
@@ -50,8 +48,6 @@ const Collects = ({title, General, Completed }) => {
 
     const handleReAddedTask = async (com) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,com.id)); 
-        setCompletedNum(completed.length - 1);
-        setNum(tasks.length + 1);
 
         await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
             text:com.text.text,
@@ -70,9 +66,6 @@ const Collects = ({title, General, Completed }) => {
     const handleDone = async (task,id) => {
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${General}`,id)); 
 
-        setCompletedNum(completed.length + 1);
-        setNum(tasks.length - 1);
-
         tasks.forEach(async one => {
         if (one == task) {
             setCompleted([...completed,one]);
@@ -87,7 +80,6 @@ const Collects = ({title, General, Completed }) => {
     }
 
     const handleDeleteTask = async (id) => {
-        setCompletedNum(completed.length - 1);
         await deleteDoc(doc(db, `${authentication.currentUser.uid}-${Completed}`,id)); 
     }
     
@@ -100,13 +92,10 @@ const Collects = ({title, General, Completed }) => {
             setValid("Add a Task");
         }
 
-        setNum(tasks.length + 1);
-
         await addDoc(collection(db,`${authentication.currentUser.uid}-${General}`), {
             text:taskRef.current.value.toLowerCase(),
             day:day
         })
-
                 
         taskRef.current.value = "";
     } 
@@ -127,12 +116,12 @@ const Collects = ({title, General, Completed }) => {
                     <input type="text" ref={taskRef} placeholder={valid} />
                 </form>
             </span>
-            <h3>Tasks - {num}</h3>
+            <h3>Tasks - {tasks.length}</h3>
             <h4>
                 {tasks.filter(user => {
                     return searchValue.toLowerCase() === "" ? user
-                    : user.text.toLowerCase().includes(searchValue);                })
-                .map(task => (
+                    : user.text.toLowerCase().includes(searchValue);
+                }).map(task => (
                 <div key={uuidv4()} className="tasks">
                     <input 
                     type="checkbox"
@@ -146,8 +135,9 @@ const Collects = ({title, General, Completed }) => {
             ))}
             </h4>
 
+           
 
-            <h3>Completed - {completedNum}</h3>
+            <h3>Completed - {completed.length}</h3>
             <h4>
             {
                 completed.filter((item) => {

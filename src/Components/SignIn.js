@@ -10,8 +10,8 @@ const SignIn = ({setEmail, setPassword,handleSign, errors}) => {
   return (
     <div className='Sign'>
         <div className="signIn">
-            <h3>Welcome back</h3>
-            <h5>Welcome back! please fill in your details.</h5>
+            <h3>Welcome back!</h3>
+            <h5>Welcome back, please fill in your details.</h5>
             <div className="authenticate">   
                 <TextField
                   id="outlined-basic" 
