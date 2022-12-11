@@ -129,8 +129,10 @@ const Collects = ({title, General, Completed }) => {
             </span>
             <h3>Tasks - {num}</h3>
             <h4>
-                {tasks.filter(user => 
-                user.text.includes(searchValue)).map(task => (
+                {tasks.filter(user => {
+                    return searchValue.toLowerCase() === "" ? user
+                    : user.text.toLowerCase().includes(searchValue);                })
+                .map(task => (
                 <div key={uuidv4()} className="tasks">
                     <input 
                     type="checkbox"
@@ -148,7 +150,10 @@ const Collects = ({title, General, Completed }) => {
             <h3>Completed - {completedNum}</h3>
             <h4>
             {
-                completed.map((com) => {
+                completed.filter((item) => {
+                    return searchValue.toLowerCase() === "" ? item
+                    : item.text.text.toLowerCase().includes(searchValue);
+                }).map((com) => {
                     return(
                         <div key={uuidv4()} className="complete" >
                             <input 
