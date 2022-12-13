@@ -1,1997 +1,1947 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
 //Landing Page
-$home-text-color:rgb(220, 220, 238);
-$home-text-size:14px;
-$primary-purple:rgba(187, 72, 158, 0.66);
+$home-text-color: rgb(220, 220, 238);
+$home-text-size: 14px;
+$primary-purple: rgba(187, 72, 158, 0.66);
 $header-backgroundColor: rgba(32, 33, 44, 100%);
-$components-background:rgb(23, 24, 31, 100%);
+$components-background: rgb(23, 24, 31, 100%);
 
 @mixin nav($nav-width) {
-    width: $nav-width;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: $nav-width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-%link-texts{
-    font-size: $home-text-size;
-    color: $home-text-color;
-    text-decoration: none;
+%link-texts {
+  font-size: $home-text-size;
+  color: $home-text-color;
+  text-decoration: none;
 }
 
-%transition{
-    transition: all .4s ease;
+%transition {
+  transition: all 0.4s ease;
 }
 
-@mixin display($justify:center,$align:center,$flex:flex,$direction:row) {
-    display: $flex;
-    justify-content: $justify;
-    align-items: $align;
-    flex-direction: $direction;
+@mixin display($justify: center, $align: center, $flex: flex, $direction: row) {
+  display: $flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
 }
 
-body{
-    background-color: $components-background;
+body {
+  background-color: $components-background;
 }
 
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    transition: all .5s ease;
-    scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  transition: all 0.5s ease;
+  scroll-behavior: smooth;
 }
 
-%home-error{
-    width: 100%;
-    height: 100vh;
-    background-image: url(./assets/Desktop/Error.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    grid-template-columns: 150px 1fr 150px;
-    grid-template-rows: 80px 350px 1fr 250px 400px 80px;
-    grid-template-areas:
-    'div nav divs'
-    'div header divs'
-    'div image divs'
-    'div expertise divs'
-    'tsksPeople tsksPeople tsksPeople'
-    'footer footer footer';
-    // overflow-y: hidden;
+%home-error {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./assets/Desktop/Error.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  grid-template-rows: 80px 350px 1fr 250px 400px 80px;
+  grid-template-areas:
+    "div nav divs"
+    "div header divs"
+    "div image divs"
+    "div expertise divs"
+    "tsksPeople tsksPeople tsksPeople"
+    "footer footer footer";
 }
 
-.ErrorPage{
-   @extend %home-error;
-   
-   nav{
+.ErrorPage {
+  @extend %home-error;
+
+  nav {
     grid-area: nav;
-    @include display(space-between,center ,flex );
+    @include display(space-between, center, flex);
 
-    .error{
-        @include nav($nav-width:20%);
-        img{
-            width: 100px;
-            object-fit:cover;
-        }
+    .error {
+      @include nav($nav-width: 20%);
+      img {
+        width: 100px;
+        object-fit: cover;
+      }
 
-        a{
-            margin-top: 2px;
-            @extend %link-texts;
-        }
+      a {
+        margin-top: 2px;
+        @extend %link-texts;
+      }
     }
 
-    .errorTwo{
-        @include nav($nav-width:13%);
+    .errorTwo {
+      @include nav($nav-width: 13%);
 
-        a{
-            @extend %link-texts;
+      a {
+        @extend %link-texts;
+      }
+
+      span {
+        width: 70px;
+        height: 25px;
+        border-radius: 4px;
+        border: 1px solid $home-text-color;
+        @include display(center, center, flex);
+        @extend %transition;
+        cursor: pointer;
+
+        a {
+          font-weight: 500;
+          font-size: 12px;
         }
 
-        span{
-            width: 70px;
-            height: 25px;
-            border-radius: 4px;
-            border: 1px solid $home-text-color;
-            @include display(center,center ,flex );
-            @extend %transition;
-            cursor: pointer;
-
-            a{
-                font-weight: 500;
-                font-size: 12px;
-            }
-
-            &:hover{
-                background-color: $primary-purple;
-            }
+        &:hover {
+          background-color: $primary-purple;
         }
+      }
     }
-   }
+  }
 
-   header{
+  header {
     margin-top: 200px;
     grid-area: header;
-    @include display($direction:column);
+    @include display($direction: column);
     gap: 20px;
 
-    h2{
-        @extend %link-texts;
-        font-size: 2.5rem;
-        font-weight: 500;
+    h2 {
+      @extend %link-texts;
+      font-size: 2.5rem;
+      font-weight: 500;
     }
 
-    p{
+    p {
+      @extend %link-texts;
+      max-width: 420px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 22px;
+    }
+
+    .buttons {
+      a {
         @extend %link-texts;
-        max-width: 420px;
+        .purple {
+          background-color: $primary-purple;
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
+
+.LandingPage {
+  @extend %home-error;
+  background-image: url(./assets/Desktop/LandingPage.png);
+
+  .div {
+    grid-area: div;
+  }
+
+  .divs {
+    grid-area: divs;
+  }
+
+  //Nav
+  nav {
+    grid-area: nav;
+    @include display(space-between, center, flex);
+
+    .navOne {
+      @include nav($nav-width: 20%);
+
+      img {
+        width: 100px;
+        object-fit: cover;
+      }
+
+      a {
+        margin-top: 2px;
+        @extend %link-texts;
+      }
+    }
+
+    .navTwo {
+      @include nav($nav-width: 13%);
+
+      a {
+        @extend %link-texts;
+      }
+
+      span {
+        width: 70px;
+        height: 25px;
+        border-radius: 4px;
+        border: 1px solid $home-text-color;
+        @include display(center, center, flex);
+        @extend %transition;
+        cursor: pointer;
+
+        a {
+          font-weight: 500;
+          font-size: 12px;
+        }
+
+        &:hover {
+          background-color: $primary-purple;
+        }
+      }
+    }
+  }
+
+  //Header
+  header {
+    grid-area: header;
+    @include display($direction: column);
+    gap: 20px;
+
+    h2 {
+      font-size: 2.5rem;
+      color: $home-text-color;
+      font-weight: 500;
+
+      span {
+        color: $primary-purple;
+      }
+    }
+
+    p {
+      width: 200px;
+      font-size: 12px;
+      color: $home-text-color;
+      text-align: center;
+      line-height: 19px;
+    }
+
+    .buttons {
+      @include display();
+      gap: 30px;
+      margin-top: 14px;
+
+      a {
+        @extend %link-texts;
+      }
+
+      .purple {
+        background-color: $primary-purple;
+        font-size: 10px;
+        height: 32px;
+        @extend %transition;
+
+        &:hover {
+          background-color: rgba(139, 49, 116, 0.625);
+          transform: translateY(6px);
+        }
+      }
+
+      .black {
+        background-color: rgb(65, 64, 82, 100%);
+        font-size: 10px;
+        height: 32px;
+        @extend %transition;
+
+        &:hover {
+          transform: translateY(6px);
+          background-color: rgba(18, 21, 23, 81%);
+        }
+      }
+    }
+  }
+
+  .LandingImage {
+    grid-area: image;
+    @include display();
+    img {
+      width: 70%;
+      height: 93%;
+      object-fit: cover;
+    }
+  }
+
+  .expertise {
+    grid-area: expertise;
+    align-self: center;
+    @include display($direction: column, $justify: space-around);
+    height: 180px;
+
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      color: $home-text-color;
+      font-weight: bolder;
+    }
+
+    p {
+      width: 75%;
+      text-align: center;
+      font-size: 13px;
+      color: $home-text-color;
+      line-height: 22px;
+    }
+
+    .black {
+      width: 200px;
+      height: 45px;
+      background-color: $primary-purple;
+      font-size: 15px;
+      @extend %transition;
+      // transition: all .6s ease;
+      margin-bottom: -16px;
+      &:hover {
+        background-color: rgba(139, 49, 116, 0.625);
+        transform: translateY(10px);
+      }
+    }
+  }
+
+  .tsksPeople {
+    grid-area: tsksPeople;
+    // @include display();
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    margin: 0 40px 0 40px;
+
+    div {
+      @include display($direction: column, $justify: unset);
+      height: 200px;
+      gap: 8px;
+      img {
+        width: 170px;
+        height: 150px;
+      }
+
+      h4 {
+        font-size: 16px;
+        font-weight: bolder;
+        color: $home-text-color;
+      }
+
+      p {
+        color: $home-text-color;
+        font-size: 13px;
+        width: 80%;
+        line-height: 20px;
         text-align: center;
-        font-size: 12px;
-        line-height: 22px;
+      }
     }
+  }
 
-    .buttons{
-        a{
-            @extend %link-texts;
-            .purple{
-                background-color: $primary-purple;
-                font-size: 12px;
-                text-transform: capitalize
-            }
+  footer {
+    grid-area: footer;
+    margin-top: 50px;
+    height: 80px;
+    @include display($justify: center);
+    background-color: #1d1e25;
+    .innerfoot {
+      width: 75%;
+      @include display($justify: space-between);
+      img {
+        width: auto;
+        height: 50px;
+      }
+
+      div {
+        width: 100px;
+        @include display($justify: space-between);
+        img {
+          width: 20px;
+          height: 20px;
+          @extend %transition;
+
+          &:hover {
+            width: 22px;
+            height: 22px;
+          }
         }
+      }
     }
-   }
+  }
 }
-
-.LandingPage{
-    @extend %home-error;
-    background-image: url(./assets/Desktop/LandingPage.png);
-
-    .div{
-        grid-area: div;
-    }
-    
-    .divs{
-        grid-area: divs;
-    }
-    
-    //Nav
-    nav{
-        grid-area: nav;
-        @include display(space-between,center ,flex );
-
-        
-    
-        .navOne{
-            @include nav($nav-width:20%);
-    
-            img{
-                width: 100px;
-                object-fit:cover;
-            }
-    
-            a{
-                margin-top: 2px;
-                @extend %link-texts;
-            }
-        }
-    
-        .navTwo{
-            @include nav($nav-width:13%);
-    
-            a{
-                @extend %link-texts;
-            }
-    
-            span{
-                width: 70px;
-                height: 25px;
-                border-radius: 4px;
-                border: 1px solid $home-text-color;
-                @include display(center,center ,flex );
-                @extend %transition;
-                cursor: pointer;
-
-                a{
-                    font-weight: 500;
-                    font-size: 12px;
-                }
-    
-                &:hover{
-                    background-color: $primary-purple;
-                }
-            }
-        }
-    
-    
-    }
-    
-    
-    //Header
-    header{
-        grid-area: header;
-        @include display($direction:column);
-        gap: 20px;
-    
-        h2{
-            font-size: 2.5rem;
-            color: $home-text-color;
-            font-weight: 500;
-    
-            span{
-                color: $primary-purple;
-            }
-        }
-    
-        p{
-            width: 200px;
-            font-size: 12px;
-            color: $home-text-color;
-            text-align: center;
-            line-height: 19px
-        }
-    
-        .buttons{
-            @include display();
-            gap: 30px;
-            margin-top: 14px;
-
-            a{
-                @extend %link-texts;
-            }
-    
-           .purple{
-                background-color: $primary-purple;
-                font-size: 10px;
-                height: 32px;
-                @extend %transition;
-    
-                &:hover{
-                    background-color: rgba(139, 49, 116, 0.625);
-                    transform: translateY(6px);
-                }
-            }
-    
-            .black{
-                background-color: rgb(65, 64, 82,100%);
-                font-size: 10px;
-                height: 32px;
-                @extend %transition;
-                
-                &:hover{
-                    transform: translateY(6px);
-                    background-color: rgba(18, 21, 23, 81%);
-                }
-            }
-        }
-    }
-    
-    .LandingImage{
-        grid-area: image;
-        @include display( );
-        img{
-            width: 70%;
-            height: 93%;
-            object-fit: cover;
-        }
-    }
-
-    .expertise{
-        grid-area: expertise;
-        align-self: center;
-        @include display($direction:column, $justify:space-around);
-        height: 180px;
-
-        h2{
-            font-size: 32px;
-            text-align: center;
-            color: $home-text-color;
-            font-weight: bolder;
-        }
-
-        p{
-            width: 75%;
-            text-align: center;
-            font-size: 13px;
-            color: $home-text-color;
-            line-height: 22px;
-
-        }
-
-        .black{
-            width: 200px;
-            height: 45px;
-            background-color: $primary-purple;
-            font-size: 15px;
-            @extend %transition;
-            // transition: all .6s ease;
-            margin-bottom: -16px;
-            &:hover{
-                background-color: rgba(139, 49, 116, 0.625);
-                transform: translateY(10px);
-            }
-        }
-    }
-
-    .tsksPeople{
-        grid-area: tsksPeople;
-        // @include display();
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        align-items: center;
-        margin: 0 40px 0 40px;
-
-        div{
-            @include display($direction:column,$justify:unset);
-            height: 200px;
-            gap: 8px;
-            img{
-                width: 170px;
-                height: 150px;
-            }
-    
-            h4{
-                font-size: 16px;
-                font-weight: bolder;
-                color: $home-text-color;
-            }    
-
-            p{
-                color: $home-text-color;
-                font-size: 13px;
-                width: 80%;
-                line-height: 20px;
-                text-align: center;
-            }
-        }
-    }
-
-
-
-    footer{
-        grid-area: footer;
-        margin-top: 50px;
-        height: 80px;
-        @include display($justify:center);
-        background-color: #1D1E25;
-        .innerfoot{
-            width: 75%;
-            @include display($justify:space-between);
-            img{
-                width: auto;
-                height: 50px;
-            }
-    
-            div{
-                width: 100px;
-                @include display($justify:space-between);
-                img{
-                    width: 20px;
-                    height: 20px;
-                    @extend %transition;
-
-                    &:hover{
-                        width: 22px;
-                        height: 22px;
-                    }
-                }
-            }
-        }
-
-    }
-}
-
 
 //Sign In / Sign Up Page
 
-.Sign{
-    width: 100%;
-    height: 100vh;
-    background-image: url(./assets/Desktop/Login.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    @include display();
+.Sign {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./assets/Desktop/Login.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include display();
 
-    .signIn{
-        width: 290px;
-        height: 350px;
-        @include display($direction:column,$justify:unset);
-        gap: 30px;
+  .signIn {
+    width: 290px;
+    height: 350px;
+    @include display($direction: column, $justify: unset);
+    gap: 30px;
 
-        h3{
-            align-self: flex-start;
-            font-size: 27px;
-            font-weight: 500;
-            color: $home-text-color;
-        }
-
-        h5{
-            align-self: flex-start;
-            font-size: 12px;
-            margin-top: 10px;
-            color: $home-text-color;
-        }
-
-        .authenticate{
-            @include display($direction:column,$justify:space-around);
-            height: 280px;
-
-            .loginErrors{
-                color: $primary-purple;
-                font-size: 12px;
-                margin-bottom: -20px;
-                padding-top: 4px;
-            }
-
-            %sign{
-                height: 35px;
-                width: 280px;
-                font-size: 12px;
-                background-color: $primary-purple;
-                border-radius: 6px;
-                @extend %transition;
-            }
-
-            #outlined-basic, #outlined-password-input,#outlined-name-input{
-                background-color: transparent;
-                border: 1px solid $home-text-color;
-                @extend %sign;
-                border-top-color: #1D1E25;
-                border-right-color: #1D1E25;
-                border-left-color: #1D1E25;
-                border-radius: 0px;
-                @include display();
-                color: $home-text-color;
-
-                &::placeholder{
-                    color: $home-text-color;
-                }
-
-            }
-            
-
-
-            a{
-                margin-top: 30px;
-                @extend %link-texts;
-                Button{
-                    @extend %sign;
-
-                    text-transform: capitalize;
-                    &:hover{
-                        background-color: rgba(139, 49, 116, 0.625);
-                    }
-                }
-            }
-        }
-
-        p{
-            font-size: $home-text-size;
-            color: $home-text-color;
-            font-size: 12px;
-            width: 400px;
-            text-align: center;
-            span{
-                font-weight: 500;
-
-                a{
-                    font-weight: 500;
-                    color: $home-text-color;
-                    text-decoration: none;
-                }
-            }
-
-     
-        }
-
-
+    h3 {
+      align-self: flex-start;
+      font-size: 27px;
+      font-weight: 500;
+      color: $home-text-color;
     }
+
+    h5 {
+      align-self: flex-start;
+      font-size: 12px;
+      margin-top: 10px;
+      color: $home-text-color;
+    }
+
+    .authenticate {
+      @include display($direction: column, $justify: space-around);
+      height: 280px;
+
+      .loginErrors {
+        color: $primary-purple;
+        font-size: 12px;
+        margin-bottom: -20px;
+        padding-top: 4px;
+      }
+
+      %sign {
+        height: 35px;
+        width: 280px;
+        font-size: 12px;
+        background-color: $primary-purple;
+        border-radius: 6px;
+        @extend %transition;
+      }
+
+      #outlined-basic,
+      #outlined-password-input,
+      #outlined-name-input {
+        background-color: transparent;
+        border: 1px solid $home-text-color;
+        @extend %sign;
+        border-top-color: #1d1e25;
+        border-right-color: #1d1e25;
+        border-left-color: #1d1e25;
+        border-radius: 0px;
+        @include display();
+        color: $home-text-color;
+
+        &::placeholder {
+          color: $home-text-color;
+        }
+      }
+
+      a {
+        margin-top: 30px;
+        @extend %link-texts;
+        Button {
+          @extend %sign;
+
+          text-transform: capitalize;
+          &:hover {
+            background-color: rgba(139, 49, 116, 0.625);
+          }
+        }
+      }
+    }
+
+    p {
+      font-size: $home-text-size;
+      color: $home-text-color;
+      font-size: 12px;
+      width: 400px;
+      text-align: center;
+      span {
+        font-weight: 500;
+
+        a {
+          font-weight: 500;
+          color: $home-text-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
-
-
 
 //Dashboard Component
-.Dashboard,.Account,.Collections,.Collects,.School,.Design,.Work,.Personal,.Variant,.House{
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    grid-template-rows: 45px 1fr;
-    grid-template-areas: 
-    'dashboardHeader dashboardHeader'
-    'sidebar otherComponents';
+.Dashboard,
+.Account,
+.Collections,
+.Collects,
+.School,
+.Design,
+.Work,
+.Personal,
+.Variant,
+.House {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 45px 1fr;
+  grid-template-areas:
+    "dashboardHeader dashboardHeader"
+    "sidebar otherComponents";
 }
-
-
-
 
 //Header Component
-.Header{
-    position: fixed;
-    width: 100%;
-    height: 45px;
-    z-index: 5;
-    grid-area: dashboardHeader;
-    @include display(space-between,center , flex, );
-    background-color: $header-backgroundColor;
-    color: $home-text-color;
-    font-size: $home-text-size;
-    font-weight: 500;
-    box-shadow: 10px 2px 5px rgb(23, 24, 31, 100%);
-  
-    cursor: pointer;
-    .headerOne{
-        @include display(unset,center , flex, );
-        gap: 30px;
-        padding-left: 15px;
-    
-        a{
-            @extend %link-texts;
-        }
+.Header {
+  position: fixed;
+  width: 100%;
+  height: 45px;
+  z-index: 5;
+  grid-area: dashboardHeader;
+  @include display(space-between, center, flex);
+  background-color: $header-backgroundColor;
+  color: $home-text-color;
+  font-size: $home-text-size;
+  font-weight: 500;
+  box-shadow: 10px 2px 5px rgb(23, 24, 31, 100%);
 
-        li{
-            @include display(unset,center , flex, );
-            gap: 5px;
-        }
+  cursor: pointer;
+  .headerOne {
+    @include display(unset, center, flex);
+    gap: 30px;
+    padding-left: 15px;
+
+    a {
+      @extend %link-texts;
     }
 
-    .headerTwo{
-        padding-right: 20px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        .acc{
-            @include display( );
-            img{
-                width: 30px;
-                height: 27px;
-                border-radius: 10px;
-            }
-        }
-
+    li {
+      @include display(unset, center, flex);
+      gap: 5px;
     }
-    img{
-        width: 20px;
-        height: 20px;
+  }
+
+  .headerTwo {
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .acc {
+      @include display();
+      img {
+        width: 30px;
+        height: 27px;
+        border-radius: 10px;
+      }
     }
-
-
-
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
-
-
-
-
 // Sidebar Component
-.SideBar{
-    grid-area: sidebar;
-    position: relative;
-    left: 0px;
-    background-color: $header-backgroundColor;
-    @extend %link-texts;
-    animation-duration: .7s;
-    
-    .sidebarItems{
-        height: 100%;
-        @include display(unset,unset,flex,column);
-        gap: 30px;
-        padding-top: 20px;
-        padding-left: 30px;
-        
-        p{
-            font-weight: 800;
-        }
-        a{
-            text-decoration: none;
-            color: $home-text-color;
-            span{
-                @include display(unset,center ,flex ,row );
-                gap: 10px;
-                cursor: pointer;
-                font-weight: 500;
-                img{
-                    width: 35px;
-                    height: 30px;
-                }
-            }
-        }
+.SideBar {
+  grid-area: sidebar;
+  position: relative;
+  left: 0px;
+  background-color: $header-backgroundColor;
+  @extend %link-texts;
+  animation-duration: 0.7s;
+
+  .sidebarItems {
+    height: 100%;
+    @include display(unset, unset, flex, column);
+    gap: 30px;
+    padding-top: 20px;
+    padding-left: 30px;
+
+    p {
+      font-weight: 800;
     }
+    a {
+      text-decoration: none;
+      color: $home-text-color;
+      span {
+        @include display(unset, center, flex, row);
+        gap: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        img {
+          width: 35px;
+          height: 30px;
+        }
+      }
+    }
+  }
 }
 
 //Components @Extend
 
-%componentCover{
-    grid-area: otherComponents;
-    @include display( $direction:column, $justify:unset);
-    width: 100%;
-    height: 100%;
-    background-color: $components-background;
+%componentCover {
+  grid-area: otherComponents;
+  @include display($direction: column, $justify: unset);
+  width: 100%;
+  height: 100%;
+  background-color: $components-background;
 }
 
-%innerComponentCover{
-    margin-top: 50px;
-    @include display( $direction:column, $justify:unset,$align:unset);
-    gap: 40px;
-    width: 400px;
-    height: 100%;
+%innerComponentCover {
+  margin-top: 50px;
+  @include display($direction: column, $justify: unset, $align: unset);
+  gap: 40px;
+  width: 400px;
+  height: 100%;
 }
 
-%componentHeader{
-    @extend %link-texts;
-    font-size: 19px;
-    font-weight: 700;
+%componentHeader {
+  @extend %link-texts;
+  font-size: 19px;
+  font-weight: 700;
 }
 
-%button{
-    background-color: rgba(82, 80, 80, 0.752);
-    font-size: 11px;
-    height: 32px;
-    width: 110px;
-    text-transform: capitalize;
-    cursor: text;
+%button {
+  background-color: rgba(82, 80, 80, 0.752);
+  font-size: 11px;
+  height: 32px;
+  width: 110px;
+  text-transform: capitalize;
+  cursor: text;
 }
 
-%pOne{
-    font-size: 12px;
-    font-weight: 600;
-    color: #c0bfbf;
+%pOne {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c0bfbf;
 }
 
-%pTwo{
-    @extend %link-texts;
-    font-size: 13px;
-    font-weight: 600;
+%pTwo {
+  @extend %link-texts;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.myAccount{
-    @extend %componentCover;
+.myAccount {
+  @extend %componentCover;
 
-    .accountDets{
-        @extend %innerComponentCover;
-        gap: 25px;
-        .myAccountSpan{
-            @include display($justify:unset);
-            gap: 10px;
-            margin-bottom: 20px;
+  .accountDets {
+    @extend %innerComponentCover;
+    gap: 25px;
+    .myAccountSpan {
+      @include display($justify: unset);
+      gap: 10px;
+      margin-bottom: 20px;
 
-            a{
-                background-color: rgb(65, 64, 82,100%);
-                border-radius: 10px;
-                @include display( );
-                img{
-                    width: 35px;
-                    height: 30px;
-                }
-               
-            }
+      a {
+        background-color: rgb(65, 64, 82, 100%);
+        border-radius: 10px;
+        @include display();
+        img {
+          width: 35px;
+          height: 30px;
+        }
+      }
 
-            p{
-                @extend %componentHeader;
-            }
+      p {
+        @extend %componentHeader;
+      }
+    }
+
+    .accountImage {
+      @include display($justify: unset);
+      gap: 10px;
+      img,
+      input {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      span {
+        margin-top: 3px;
+        @include display();
+        width: 50px;
+        height: 23px;
+        border: 2px solid $primary-purple;
+        border-radius: 4px;
+        p {
+          font-size: 11px;
+          text-transform: uppercase;
+        }
+      }
+
+      p {
+        @extend %link-texts;
+        font-size: 19px;
+        font-weight: 700;
+      }
+    }
+
+    .accountItems {
+      border-radius: 10px;
+      height: 200px;
+      background-color: rgb(32, 33, 44, 100%);
+      @include display(
+        $align: unset,
+        $justify: space-evenly,
+        $direction: column
+      );
+      div {
+        @include display($justify: space-between);
+        padding-left: 10px;
+        padding-right: 10px;
+
+        span {
+          gap: 5px;
+          @include display($direction: column, $align: start);
+          p:nth-of-type(1) {
+            @extend %pOne;
+          }
+
+          p:nth-of-type(2) {
+            @extend %pTwo;
+          }
         }
 
-        .accountImage{
-            @include display($justify:unset);
-            gap: 10px;
-            img,input{
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                object-fit: cover;
-
-            }
-            span{
-                margin-top: 3px;
-                @include display( );
-                width: 50px;
-                height: 23px;
-                border: 2px solid $primary-purple;
-                border-radius: 4px;
-                p{
-                    font-size: 11px;
-                    text-transform: uppercase;
-                }
-            }
-
-            p{
-                @extend %link-texts;
-                font-size: 19px;
-                font-weight: 700;
-            }
-        }
-
-        .accountItems{
-            border-radius: 10px;
-            height: 200px;
-            background-color:rgb(32, 33, 44,100%);
-            @include display($align:unset,$justify:space-evenly,$direction:column);
-            div{
-                @include display($justify:space-between);
-                padding-left: 10px;
-                padding-right: 10px;
-
-                span{
-                    gap: 5px;
-                    @include display( $direction:column,$align:start);
-                    p:nth-of-type(1){
-                        @extend %pOne;
-                    }
-
-                    p:nth-of-type(2){
-                        @extend %pTwo;
-                    }
-                }
-
-                a{
-                    @extend %link-texts;
-                    .edit{
-                        width: 50px;
-                        height: 30px;
-                        font-size: 11px;
-                        background-color:rgb(65, 64, 82,100%);
-                        @extend %transition;
-
-                        // &:hover{
-                        //     // background-color: rgb(151,71,225,100%);
-                        // }
-                    }
-                }
-
-            }
-        }
-        .pro{
-            border-radius: 10px;
-            height: 130px;
-            background-color:rgb(32, 33, 44,100%);
-            @include display( $direction:column,$justify:space-between);
-
-            .first{
-                width: 100%;
-                height: 100px;
-                @include display($justify:space-between);
-                padding-inline: 10px;
-                
-                span{
-                    p:nth-of-type(1){
-                        @extend %pOne;
-                    }
-
-                    p:nth-of-type(2){
-                        @extend %pTwo;
-                        margin-top: 2px;
-                    }
-                }
-
-                a{
-                    @extend %link-texts;
-                    .black{
-                        width: 130px;
-                        font-size: 12px;
-                        background-color: $primary-purple;
-                        text-transform: capitalize;
-                    }
-                }
-            }
-
-            .proBenefits{
-                height: 50px;
-                background-color: slateblue;
-                width: 100%;
-                box-shadow: 1px 2px 5px rgb(22, 23, 29);
-                background-color: rgb(39, 40, 51, 100%);
-                border-end-end-radius: 10px;
-                border-end-start-radius: 10px;
-                @include display();
-                a{
-                    font-weight: 500;
-                    @include display($justify:unset);
-                    gap: 6px;
-                    @extend %link-texts;
-                    img{
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-            }
-        }
-        .signOut{
-            background-color: rgb(65, 64, 82,100%);
-            @extend %link-texts;
+        a {
+          @extend %link-texts;
+          .edit {
+            width: 50px;
+            height: 30px;
             font-size: 11px;
-            margin: 0 auto;
-            width: 100px;
+            background-color: rgb(65, 64, 82, 100%);
             @extend %transition;
 
             // &:hover{
             //     // background-color: rgb(151,71,225,100%);
             // }
+          }
         }
+      }
     }
-}
+    .pro {
+      border-radius: 10px;
+      height: 130px;
+      background-color: rgb(32, 33, 44, 100%);
+      @include display($direction: column, $justify: space-between);
 
+      .first {
+        width: 100%;
+        height: 100px;
+        @include display($justify: space-between);
+        padding-inline: 10px;
 
+        span {
+          p:nth-of-type(1) {
+            @extend %pOne;
+          }
 
-#close{
-    animation: sider .7s ease both;
-    @keyframes sider {
-       from{
-        left: 0;
-       }
-       to{
-        left: -250px;
-       }
+          p:nth-of-type(2) {
+            @extend %pTwo;
+            margin-top: 2px;
+          }
+        }
+
+        a {
+          @extend %link-texts;
+          .black {
+            width: 130px;
+            font-size: 12px;
+            background-color: $primary-purple;
+            text-transform: capitalize;
+          }
+        }
+      }
+
+      .proBenefits {
+        height: 50px;
+        background-color: slateblue;
+        width: 100%;
+        box-shadow: 1px 2px 5px rgb(22, 23, 29);
+        background-color: rgb(39, 40, 51, 100%);
+        border-end-end-radius: 10px;
+        border-end-start-radius: 10px;
+        @include display();
+        a {
+          font-weight: 500;
+          @include display($justify: unset);
+          gap: 6px;
+          @extend %link-texts;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
     }
+    .signOut {
+      background-color: rgb(65, 64, 82, 100%);
+      @extend %link-texts;
+      font-size: 11px;
+      margin: 0 auto;
+      width: 100px;
+      @extend %transition;
+
+      // &:hover{
+      //     // background-color: rgb(151,71,225,100%);
+      // }
+    }
+  }
 }
 
-#extend{
-    grid-template-columns: 0px 1fr;
-    grid-template-areas: 
-    'dashboardHeader dashboardHeader'
-    'otherComponents';
-    @extend %transition;
+#close {
+  animation: sider 0.7s ease both;
+  @keyframes sider {
+    from {
+      left: 0;
+    }
+    to {
+      left: -250px;
+    }
+  }
 }
 
+#extend {
+  grid-template-columns: 0px 1fr;
+  grid-template-areas:
+    "dashboardHeader dashboardHeader"
+    "otherComponents";
+  @extend %transition;
+}
 
-.innerDashboard{
-    @extend %componentCover;
-    margin-bottom: 70px;
-    .dashboardInfo{
-        @extend %innerComponentCover;
+.innerDashboard {
+  @extend %componentCover;
+  margin-bottom: 70px;
+  .dashboardInfo {
+    @extend %innerComponentCover;
 
-        h4{
-            @extend %componentHeader;
+    h4 {
+      @extend %componentHeader;
+    }
+
+    h2 {
+      @extend %link-texts;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .black {
+      @extend %button;
+      background-color: rgb(65, 64, 82, 100%);
+    }
+
+    .overview {
+      border-radius: 12px;
+      min-height: 150px;
+      background-color: rgb(32, 33, 44, 100%);
+      @include display(
+        $direction: column,
+        $justify: space-between,
+        $align: unset
+      );
+
+      .overviewHead {
+        box-shadow: 1px 2px 5px rgb(22, 23, 29);
+        height: 50px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        background-color: rgb(39, 40, 51, 100%);
+        @include display($justify: unset, $align: center);
+        gap: 10px;
+        margin-bottom: 5px;
+        padding-left: 10px;
+        img {
+          width: 26px;
+          height: 24px;
         }
-
-        h2{
-            @extend %link-texts;
-            font-size: 28px;
-            font-weight: 700;
+        p {
+          @extend %link-texts;
+          font-weight: 600;
         }
+      }
 
-        .black{
-            @extend %button;
-            background-color: rgb(65, 64, 82,100%);
-        }
+      .overviewBody {
+        padding-left: 15px;
+        height: 90px;
+        color: $home-text-color;
 
-        .overview{
-            border-radius: 12px;
-            min-height: 150px;
-            background-color: rgb(32, 33, 44,100%);
-            @include display($direction:column, $justify:space-between,$align:unset);
+        span {
+          @include display($justify: unset, $align: start, $direction: column);
+          gap: 15px;
+          height: inherit;
+          overflow-y: scroll;
+          &::-webkit-scrollbar {
+            width: 4px;
+            height: 10px;
+          }
 
-            .overviewHead{
-                box-shadow: 1px 2px 5px rgb(22, 23, 29);
-                height: 50px;
-                border-top-left-radius: 12px;
-                border-top-right-radius: 12px;
-                background-color: rgb(39, 40, 51, 100%);
-                @include display($justify:unset,$align:center);
-                gap: 10px;
-                margin-bottom: 5px;
-                padding-left: 10px;
-                img{
-                    width: 26px;
-                    height: 24px;
-                }
-                p{
-                    @extend %link-texts;
-                    font-weight: 600;
-                }
+          &::-webkit-scrollbar-track {
+            border-radius: 10px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: gray;
+            border-radius: 10px;
+          }
+
+          div {
+            @include display(
+              $justify: unset,
+              $align: start,
+              $direction: column
+            );
+            gap: 2px;
+            p {
+              font-size: 13px;
+              font-weight: 500;
             }
 
-            .overviewBody{
-                padding-left: 15px;
-                height: 90px;
-                color: $home-text-color;
-
-                span{
-                    @include display($justify:unset,$align:start,$direction:column);
-                    gap: 15px;
-                    height: inherit;
-                    overflow-y: scroll;
-                    &::-webkit-scrollbar {
-                        width: 4px;
-                        height: 10px;
-                    }
-                    
-                    &::-webkit-scrollbar-track {
-                        border-radius: 10px;
-                    }
-                    
-                    &::-webkit-scrollbar-thumb {
-                        background: gray;
-                        border-radius: 10px;
-                    }
-  
-                    div{
-                        @include display($justify:unset,$align:start,$direction:column);
-                        gap: 2px;
-                        p{
-                            font-size: 13px;
-                            font-weight: 500;
-                        }
-        
-                        span{
-                            font-size: 11px;
-                            color: seagreen;
-                        }
-                    }
-                }
+            span {
+              font-size: 11px;
+              color: seagreen;
             }
-            .overviewLink{
-                border-top: .2px solid #c0bfbf;
-                height: 35px;
-                @include display( );
-                a {
-                    @include display( $justify:unset);
-                    gap: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    @extend %link-texts;
-                    
-                    img{
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-            }
+          }
         }
-    }
-}
+      }
+      .overviewLink {
+        border-top: 0.2px solid #c0bfbf;
+        height: 35px;
+        @include display();
+        a {
+          @include display($justify: unset);
+          gap: 10px;
+          font-size: 12px;
+          font-weight: 700;
+          @extend %link-texts;
 
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
 
 //Collections Page
 
-.CollectionDets{
-    @extend %componentCover;
-    
-    .innerCollectionDets{
-        @extend %innerComponentCover;
+.CollectionDets {
+  @extend %componentCover;
 
-        h3{
-            @extend %componentHeader;
-            margin-bottom: 30px;
-        }
+  .innerCollectionDets {
+    @extend %innerComponentCover;
 
-        .black{
-            @extend %button;
-            background-color: rgb(65, 64, 82,100%);
-            border-radius: 8px;
-        }
-
-
-        .collectionItems{
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 8px;
-            a{
-                text-decoration: none;
-                  
-                .collects{
-                    width: 155px;
-                    height: 145px;
-                    background-color: rgb(32, 33, 44,100%);
-                    padding-left: 12px;
-                    border-radius: 15px;
-                    // gap: 2px;
-                    @include display($direction:column, $justify:space-evenly,$align:unset);
-                    img{
-                        width: 35px;
-                        height: 30px;
-                        margin-bottom: 20px;
-                    }
-
-                    p{
-                        @extend %link-texts;
-                        font-weight: 700;
-                        font-size: 16px;
-                    }
-
-                    .img{
-                        width: 20px;
-                        height: 15px;
-                        margin-bottom: 10px;
-                    }
-                }
-            }
-
-        }
+    h3 {
+      @extend %componentHeader;
+      margin-bottom: 30px;
     }
+
+    .black {
+      @extend %button;
+      background-color: rgb(65, 64, 82, 100%);
+      border-radius: 8px;
+    }
+
+    .collectionItems {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      a {
+        text-decoration: none;
+
+        .collects {
+          width: 155px;
+          height: 145px;
+          background-color: rgb(32, 33, 44, 100%);
+          padding-left: 12px;
+          border-radius: 15px;
+          // gap: 2px;
+          @include display(
+            $direction: column,
+            $justify: space-evenly,
+            $align: unset
+          );
+          img {
+            width: 35px;
+            height: 30px;
+            margin-bottom: 20px;
+          }
+
+          p {
+            @extend %link-texts;
+            font-weight: 700;
+            font-size: 16px;
+          }
+
+          .img {
+            width: 20px;
+            height: 15px;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
 }
 
-
-
 //School, Design, Personal,Grocery
-.innerSchool{
-    @extend %componentCover;
+.innerSchool {
+  @extend %componentCover;
 
-    .schoolDets{
-        @extend %innerComponentCover;
-        width: 500px;
-        position: relative;
+  .schoolDets {
+    @extend %innerComponentCover;
+    width: 500px;
+    position: relative;
+  }
+
+  .schoolHeader {
+    @extend %componentHeader;
+    @include display($justify: unset);
+    gap: 13px;
+    a {
+      background-color: rgb(32, 33, 44, 100%);
+      border-radius: 10px;
+      @include display();
+      img {
+        width: 35px;
+        height: 30px;
+      }
     }
 
-
-
-    .schoolHeader{
-        @extend %componentHeader;
-        @include display($justify:unset );
-        gap: 13px;
-        a{
-            background-color: rgb(32, 33, 44,100%);
-            border-radius: 10px;
-            @include display( );
-            img{
-                width: 35px;
-                height: 30px;
-            }
-        }
-
-        .searchInput{
-            height: 27px;
-            border: 2px solid $primary-purple;
-            border-radius: 10px;
-            background-color: $components-background;
-            color: white;
-            position: absolute;
-            top: 1px;
-            right: 5px;
-            visibility: 0%;
-            padding-left: 7px;
-            padding-right: 25px;
-            &:focus{
-                outline: none;
-            }
-        }
-
-        #showsearch{
-            display: none;
-        }
-
-        .searchImage{
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            right: 10px;
-            cursor: pointer;
-        }
+    .searchInput {
+      height: 27px;
+      border: 2px solid $primary-purple;
+      border-radius: 10px;
+      background-color: $components-background;
+      color: white;
+      position: absolute;
+      top: 1px;
+      right: 5px;
+      visibility: 0%;
+      padding-left: 7px;
+      padding-right: 25px;
+      &:focus {
+        outline: none;
+      }
     }
 
-    span:nth-of-type(2){
-        @extend %componentHeader;
-        @include display($justify:unset );
-        gap: 3px;
-        img{
-            border-radius: 10px;
-            width: 28px;
-            height:25x;
-            position: absolute;
-            z-index: 1;
-            margin-left: 7px;
-            cursor: pointer;
-        }
-
-        form{
-            width: 100%;
-        }
-
-        input{
-            padding-left: 45px;
-            @extend %link-texts;
-            width: 100%;
-            height: 40px;
-            background-color: transparent;
-            outline: none;
-            border: .2px solid #eae4e4;
-            border-radius: 15px;
-            position: relative;
-            z-index: 0;
-            &::placeholder{
-                color: $home-text-color;
-            }
-        }
+    #showsearch {
+      display: none;
     }
+
+    .searchImage {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  span:nth-of-type(2) {
+    @extend %componentHeader;
+    @include display($justify: unset);
+    gap: 3px;
+    img {
+      border-radius: 10px;
+      width: 28px;
+      height: 25x;
+      position: absolute;
+      z-index: 1;
+      margin-left: 7px;
+      cursor: pointer;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    input {
+      padding-left: 45px;
+      @extend %link-texts;
+      width: 100%;
+      height: 40px;
+      background-color: transparent;
+      outline: none;
+      border: 0.2px solid #eae4e4;
+      border-radius: 15px;
+      position: relative;
+      z-index: 0;
+      &::placeholder {
+        color: $home-text-color;
+      }
+    }
+  }
 }
 
 //Tasks Section
-h3{
-    @extend %link-texts;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: -25px;
+h3 {
+  @extend %link-texts;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: -25px;
 }
 
-h4{
-    @include display($align:unset,$justify:unset,$direction:column);
-    gap: 7px;
+h4 {
+  @include display($align: unset, $justify: unset, $direction: column);
+  gap: 7px;
 }
 
-
-%task-complete{
-    padding-left: 13px;
-    @extend %link-texts;
-    width: 100%;
-    min-height: 60px;
-    background-color: rgb(32, 33, 44,100%);
-    outline: none;
-    border: .2px solid transparent;
-    border-radius: 15px;
-    position: relative;
-    z-index: 0;
-    @include display( $justify:unset, $align:unset);
-    overflow-x: auto;
-    gap:10px;
-    position: relative;
-    padding-top: 10px;
+%task-complete {
+  padding-left: 13px;
+  @extend %link-texts;
+  width: 100%;
+  min-height: 60px;
+  background-color: rgb(32, 33, 44, 100%);
+  outline: none;
+  border: 0.2px solid transparent;
+  border-radius: 15px;
+  position: relative;
+  z-index: 0;
+  @include display($justify: unset, $align: unset);
+  overflow-x: auto;
+  gap: 10px;
+  position: relative;
+  padding-top: 10px;
 }
 
-%task-input{
-    width: 14px;
-    height: 14px;
-    background-color: transparent;
-    accent-color: $primary-purple;
-    outline: 2px solid $primary-purple; 
+%task-input {
+  width: 14px;
+  height: 14px;
+  background-color: transparent;
+  accent-color: $primary-purple;
+  outline: 2px solid $primary-purple;
 }
 
-%task-img{
-    bottom: 10px;
+%task-img {
+  bottom: 10px;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 42px;
+}
+
+%date {
+  @extend %link-texts;
+  color: lightgreen;
+  font-size: 11px;
+  position: absolute;
+  bottom: 10px;
+  left: 62px;
+}
+
+.tasks {
+  @extend %task-complete;
+
+  input[type="checkbox"] {
+    @extend %task-input;
+  }
+
+  font-size: 13px;
+
+  span {
+    background-color: lavender;
     position: absolute;
-    width: 14px;
-    height: 14px;
-    left: 42px;
+    right: 12px;
+  }
+
+  img {
+    @extend %task-img;
+  }
+  p:nth-of-type(2) {
+    @extend %date;
+  }
 }
 
-%date{
-    @extend %link-texts;
-    color: lightgreen;
-    font-size: 11px;
+.complete {
+  @extend %task-complete;
+
+  input[type="checkbox"] {
+    @extend %task-input;
+  }
+
+  span {
     position: absolute;
-    bottom: 10px;
-    left: 62px;
+    right: 12px;
+  }
+
+  font-size: 13px;
+
+  img {
+    @extend %task-img;
+  }
+
+  p {
+    @extend %date;
+  }
+
+  img:nth-of-type(2) {
+    bottom: 20px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 94%;
+    cursor: pointer;
+  }
 }
 
-.tasks{
-    @extend %task-complete;
+.disName {
+  max-width: 760px;
+  height: 250px;
+  @include display($direction: column, $justify: unset);
 
-    input[type=checkbox]{
-     @extend %task-input;
+  h3 {
+    font-size: 27px;
+    font-weight: 500;
+    color: $home-text-color;
+  }
+
+  .authenticate {
+    @include display($direction: column, $justify: space-around);
+    height: 200px;
+
+    %sign {
+      width: 220px;
+      height: 35px;
+      font-size: 12px;
+      background-color: $primary-purple;
+      border-radius: 6px;
+      @extend %transition;
     }
 
-    font-size: 13px;
-   
-    span{
-        background-color: lavender;
-        position: absolute;
-        right: 12px;
-    }
+    #outlined-basic {
+      background-color: transparent;
+      border: 1px solid $home-text-color;
+      @extend %sign;
+      height: 5px;
+      width: 190px;
+      color: $home-text-color;
+      margin-bottom: -80px;
 
-    img{
-        @extend %task-img;
-    }
-    p:nth-of-type(2){
-        @extend %date;
-    }
-}
-
-.complete{
-    @extend %task-complete;
-
-    input[type=checkbox]{
-        @extend %task-input;
-    }
-
-    span{
-        position: absolute;
-        right: 12px;
-    }
-
-    font-size: 13px;
-
-
-    img{
-        @extend %task-img;
-    }
-
-    p{        
-        @extend %date;
-    }
-
-    img:nth-of-type(2){
-        bottom: 20px;
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 94%;
-        cursor: pointer;
-    }
-}
-
-
-.disName{
-    max-width: 760px;
-    height: 250px;
-    @include display($direction:column,$justify:unset);
-
-    h3{
-        font-size: 27px;
-        font-weight: 500;
+      &::placeholder {
         color: $home-text-color;
+      }
+
+      &:hover {
+        border: 1px solid $primary-purple;
+        background-color: transparent;
+      }
+
+      &:focus {
+        outline: 1px solid $primary-purple;
+        border-radius: 5px;
+      }
     }
 
-    .authenticate{
-        @include display($direction:column,$justify:space-around);
-        height: 200px;
-
-        %sign{
-            width: 220px;
-            height: 35px;
-            font-size: 12px;
-            background-color: $primary-purple;
-            border-radius: 6px;
-            @extend %transition;
-        }
-
-        #outlined-basic{
-            background-color: transparent;
-            border: 1px solid $home-text-color;
-            @extend %sign;
-            height: 5px;
-            width: 190px;
-            color: $home-text-color;
-            margin-bottom: -80px;
-
-            &::placeholder{
-                color: $home-text-color;
-            }
-
-            &:hover{
-                border: 1px solid $primary-purple;
-                background-color: transparent;
-            }
-
-            &:focus{
-                outline: 1px solid $primary-purple ;
-                border-radius: 5px;
-            }
-
-        }        
-        
-        Button{
-            @extend %link-texts;
-            @extend %sign;
-            text-transform: capitalize;
-            &:hover{
-                background-color: rgba(139, 49, 116, 0.625);
-            }
-        }
-        
+    Button {
+      @extend %link-texts;
+      @extend %sign;
+      text-transform: capitalize;
+      &:hover {
+        background-color: rgba(139, 49, 116, 0.625);
+      }
     }
-
+  }
 }
 
-.dashP{
-    color: white;
+.dashP {
+  color: white;
 }
-
-
 
 //Error Page
-@media screen and (max-width:1024px) {
-    .ErrorPage{
-        grid-template-columns: 120px 1fr 120px; 
-        
-        nav{
-         .error{
-             @include nav($nav-width:32%);
-         }
-     
-         .errorTwo{
-             @include nav($nav-width:20%);
-         }
-        }
-     }
+@media screen and (max-width: 1024px) {
+  .ErrorPage {
+    grid-template-columns: 120px 1fr 120px;
+
+    nav {
+      .error {
+        @include nav($nav-width: 32%);
+      }
+
+      .errorTwo {
+        @include nav($nav-width: 20%);
+      }
+    }
+  }
 }
 
-@media screen and (max-width:690px) {
+@media screen and (max-width: 690px) {
+  %home-error {
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-rows: 80px 200px 1fr;
+  }
 
-    %home-error{
-        grid-template-columns: 10px 1fr 10px;
-        grid-template-rows: 80px 200px 1fr;  
-    }
-
-    .ErrorPage{
-
-        nav{
-            .error{
-                @include nav($nav-width:35%);
-                img{
-                    width: 90px;
-                }
-        
-                a{
-                    font-size: 12px;
-                }
-            }
-        
-            .errorTwo{
-                @include nav($nav-width:25%);
-        
-                a{
-                    font-size: 12px;
-                }
-            }
+  .ErrorPage {
+    nav {
+      .error {
+        @include nav($nav-width: 35%);
+        img {
+          width: 90px;
         }
 
-        header{
-            margin-top: 0px;
-            h2{
-                font-size: 2rem;
-                text-align: center;                
-            }
-           }
+        a {
+          font-size: 12px;
+        }
+      }
+
+      .errorTwo {
+        @include nav($nav-width: 25%);
+
+        a {
+          font-size: 12px;
+        }
+      }
     }
 
+    header {
+      margin-top: 0px;
+      h2 {
+        font-size: 2rem;
+        text-align: center;
+      }
+    }
+  }
 }
 
 //Landing Page Responsive View
-@media screen and (max-width:1024px) {
-    %home-error{
-        grid-template-columns: 100px 1fr 100px;
-        grid-template-rows: 80px 350px 1fr 250px 400px 80px;
+@media screen and (max-width: 1024px) {
+  %home-error {
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 80px 350px 1fr 250px 400px 80px;
+  }
+  .LandingPage {
+    nav {
+      .navOne {
+        @include nav($nav-width: 25%);
+      }
+      .navTwo {
+        @include nav($nav-width: 20%);
+      }
     }
-    .LandingPage{
-        nav{
-            .navOne{               
-                @include nav($nav-width:25%);
-            }
-            .navTwo{
-                @include nav($nav-width:20%);                
-            }
-        }
-        //Header
-        .LandingImage{
-            img{
-                width: 90%;
-            }
-        }
-    } 
+    //Header
+    .LandingImage {
+      img {
+        width: 90%;
+      }
+    }
+  }
 }
 
-@media screen and (max-width:768px) {
-    %home-error{
-        grid-template-columns: 50px 1fr 50px;
-        grid-template-rows: 80px 350px 1fr 350px 520px 80px;
+@media screen and (max-width: 768px) {
+  %home-error {
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: 80px 350px 1fr 350px 520px 80px;
+  }
+  .LandingPage {
+    nav {
+      .navOne {
+        @include nav($nav-width: 29%);
+      }
+      .navTwo {
+        @include nav($nav-width: 25%);
+      }
     }
-    .LandingPage{
-        nav{
-            .navOne{               
-                @include nav($nav-width:29%);
-            }
-            .navTwo{
-                @include nav($nav-width:25%);                
-            }
-        }
-        //Header
-        header{
-            gap: 16px;
-        
-            p{
-                width: 350px;
-                font-size: 15px;
-                line-height: 22px;
-            }
-        }
-        
-        .LandingImage{
-            img{
-                width: 95%;
-            }
-        }
+    //Header
+    header {
+      gap: 16px;
 
-        .expertise{
-            height: 270px;
-        }
+      p {
+        width: 350px;
+        font-size: 15px;
+        line-height: 22px;
+      }
+    }
 
-        .tsksPeople {
-            margin: 0 10px 0 10px;
-            grid-template-columns: repeat(2, 1fr);
+    .LandingImage {
+      img {
+        width: 95%;
+      }
+    }
 
-            div p {
-                font-size: 12px;
-                width: 70%;
-            }
-        }
+    .expertise {
+      height: 270px;
+    }
 
-        footer .innerfoot img {
-            height: 40px;
-        }
-    }    
+    .tsksPeople {
+      margin: 0 10px 0 10px;
+      grid-template-columns: repeat(2, 1fr);
+
+      div p {
+        font-size: 12px;
+        width: 70%;
+      }
+    }
+
+    footer .innerfoot img {
+      height: 40px;
+    }
+  }
 }
 
-@media screen and (max-width:552px) {
-    %home-error{
-        grid-template-columns: 30px 1fr 30px;
-        grid-template-rows: 80px 350px 1fr 350px 520px 80px;
-    }
-    .LandingPage{
+@media screen and (max-width: 552px) {
+  %home-error {
+    grid-template-columns: 30px 1fr 30px;
+    grid-template-rows: 80px 350px 1fr 350px 520px 80px;
+  }
+  .LandingPage {
     background-image: unset;
-    background-color: rgb(29, 30, 38,100%);
+    background-color: rgb(29, 30, 38, 100%);
 
-        nav{
-            .navOne{               
-                @include nav($nav-width:35%);
-                img{
-                    width: 90px;
-                    object-fit:cover;
-                }
-        
-                a{
-                    font-size: 12px;
-                }
-            }
-            .navTwo{
-                @include nav($nav-width:30%);    
-                a{
-                    font-size: 12px;
-                }            
-            }
-        }
-        //Header
-        header{
-            gap: 16px;
-        
-            p{
-                width: 300px;
-                font-size: 13px;
-                line-height: 22px;
-            }
-        }
-        
-        .LandingImage{
-            img{
-                width: 95%;
-            }
+    nav {
+      .navOne {
+        @include nav($nav-width: 35%);
+        img {
+          width: 90px;
+          object-fit: cover;
         }
 
-        .expertise{
-            height: 210px;
-            h2{
-                font-size: 24px;
-            }
-            p{
-                width: 100%;
-            }
+        a {
+          font-size: 12px;
+        }
+      }
+      .navTwo {
+        @include nav($nav-width: 30%);
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+    //Header
+    header {
+      gap: 16px;
 
-            .black{
-                font-size: 13px;
-            }
+      p {
+        width: 300px;
+        font-size: 13px;
+        line-height: 22px;
+      }
+    }
+
+    .LandingImage {
+      img {
+        width: 95%;
+      }
+    }
+
+    .expertise {
+      height: 210px;
+      h2 {
+        font-size: 24px;
+      }
+      p {
+        width: 100%;
+      }
+
+      .black {
+        font-size: 13px;
+      }
+    }
+
+    .tsksPeople {
+      div {
+        img {
+          width: 150px;
+          height: 130px;
         }
 
-        .tsksPeople {
-            div{
-                img{
-                    width: 150px;
-                    height: 130px;
-                }
-                
-                h4{
-                    font-size: 14px;
-                    font-weight: 700;
-                }
-
-                p{
-                    font-size: 11px;
-                }
-            }
+        h4 {
+          font-size: 14px;
+          font-weight: 700;
         }
 
-
-        footer .innerfoot img {
-            height: 35px;
+        p {
+          font-size: 11px;
         }
-    }    
-    
+      }
+    }
+
+    footer .innerfoot img {
+      height: 35px;
+    }
+  }
 }
 
-@media screen and (max-width:425px) {
-    %home-error{
-        grid-template-columns: 20px 1fr 20px;
-        grid-template-rows: 80px 350px 1fr 320px 590px 80px;
+@media screen and (max-width: 425px) {
+  %home-error {
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 80px 350px 1fr 320px 590px 80px;
+  }
+  .LandingPage {
+    nav {
+      .navOne {
+        @include nav($nav-width: 40%);
+        img {
+          width: 80px;
+        }
+
+        a {
+          font-size: 11px;
+        }
+      }
+      .navTwo {
+        @include nav($nav-width: 32%);
+        a {
+          font-size: 11px;
+        }
+
+        span {
+          width: 60px;
+          height: 22px;
+
+          a {
+            font-size: 11px;
+          }
+        }
+      }
     }
-    .LandingPage{
-        nav{
-            .navOne{               
-                @include nav($nav-width:40%);
-                img{
-                    width: 80px;
-                }
-        
-                a{
-                    font-size: 11px;
-                }
-            }
-            .navTwo{
-                @include nav($nav-width:32%);    
-                a{
-                    font-size: 11px;
-                }          
-                
-                span{
-                    width: 60px;
-                    height: 22px;
-    
-                    a{
-                        font-size: 11px;
-                    }
-                }
-            }
-        }
-        //Header
-        header{
-            gap: 10px;
-        
-            h2{
-                font-size: 30px;
-            }
-            p{
-                font-size: 12px;
-            }
-            .buttons{        
-               .purple{
-                    font-size: 9px;
-                    height: 29px;
-                }
-        
-                .black{
-                    font-size: 9px;
-                    height: 29px;
-                }
-            }
-        }
-        
-        .LandingImage{
-            img{
-                width: 90%;
-                height: 100%;
-            }
+    //Header
+    header {
+      gap: 10px;
+
+      h2 {
+        font-size: 30px;
+      }
+      p {
+        font-size: 12px;
+      }
+      .buttons {
+        .purple {
+          font-size: 9px;
+          height: 29px;
         }
 
-        .expertise{
-            height: 270px;
-            h2{
-                line-height: 34px;
-            }
+        .black {
+          font-size: 9px;
+          height: 29px;
         }
+      }
+    }
 
-        .tsksPeople {
-            margin: 0 3px 0 3px;
+    .LandingImage {
+      img {
+        width: 90%;
+        height: 100%;
+      }
+    }
 
-            div p {
-                font-size: 12px;
-                width: 90%;
-            }
+    .expertise {
+      height: 270px;
+      h2 {
+        line-height: 34px;
+      }
+    }
+
+    .tsksPeople {
+      margin: 0 3px 0 3px;
+
+      div p {
+        font-size: 12px;
+        width: 90%;
+      }
+    }
+
+    footer .innerfoot {
+      width: 85%;
+
+      img {
+        height: 30px;
+      }
+
+      div {
+        width: 70px;
+        a {
+          img {
+            width: 15px;
+            height: 15px;
+          }
         }
-
-        footer .innerfoot{
-            width: 85%;
-
-            img {
-                height: 30px;
-            }  
-
-            div{
-                width: 70px;
-                a{
-                    img{
-                        width: 15px;
-                        height: 15px;
-                    }
-                }
-            }
-        } 
-
-        
-
-    }    
+      }
+    }
+  }
 }
 
-@media screen and (max-width:375px) {
-    %home-error{
-        grid-template-columns: 20px 1fr 20px;
-        grid-template-rows: 80px 350px 1fr 400px 950px 80px;
+@media screen and (max-width: 375px) {
+  %home-error {
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 80px 350px 1fr 400px 950px 80px;
+  }
+  .LandingPage {
+    .expertise {
+      h2 {
+        width: 80%;
+        font-size: 22px;
+        font-weight: 800;
+      }
     }
-    .LandingPage{
-        .expertise{
-            h2{
-                width: 80%;
-                font-size: 22px;
-                font-weight: 800;
-            }
-        }
-        .tsksPeople{
-            grid-template-columns: repeat(1, 1fr);
-            div p {
-                width: 80%;
-            }
-        }
-
-        
+    .tsksPeople {
+      grid-template-columns: repeat(1, 1fr);
+      div p {
+        width: 80%;
+      }
     }
+  }
 }
 
-@media screen and (max-width:339px) {
-    %home-error{
-        grid-template-columns: 10px 1fr 10px;
-    }
+@media screen and (max-width: 339px) {
+  %home-error {
+    grid-template-columns: 10px 1fr 10px;
+  }
 }
-
-
-
-
-
 
 //Sign In / Sign Up Responsive View
-@media screen and (max-width:425px) {
-    .Sign{
-        overflow: hidden;
-        background-color: rgb(29, 30, 38,100%);
-        background-image: unset;
-    
-        .signIn{
-            // width: 300px;
-            height: 350px;
-            h3{
-                font-size: 25px;
-            }    
-        }
-    }    
+@media screen and (max-width: 425px) {
+  .Sign {
+    overflow: hidden;
+    background-color: rgb(29, 30, 38, 100%);
+    background-image: unset;
+
+    .signIn {
+      // width: 300px;
+      height: 350px;
+      h3 {
+        font-size: 25px;
+      }
+    }
+  }
 }
-
-
-
-
-
 
 // Dashboard Responsive View
-@media screen and (max-width:1024px) {
-    .Dashboard,.Account,.Collections,.Collects,.School,.Design,.Work,.Personal{ 
-        grid-template-columns: 200px 1fr;
-    }
+@media screen and (max-width: 1024px) {
+  .Dashboard,
+  .Account,
+  .Collections,
+  .Collects,
+  .School,
+  .Design,
+  .Work,
+  .Personal {
+    grid-template-columns: 200px 1fr;
+  }
 
-    .SideBar{
-        font-size: 13px;
-        .sidebarItems{  
-            a{
-                span{
-                   
-                    img{
-                        width: 28px;
-                        height: 28px;
-                    }
-                }
-            }
+  .SideBar {
+    font-size: 13px;
+    .sidebarItems {
+      a {
+        span {
+          img {
+            width: 28px;
+            height: 28px;
+          }
         }
+      }
     }
+  }
 
-
-    .myAccount{
-        
-        .accountDets{
-            height: 600px;
-        }
+  .myAccount {
+    .accountDets {
+      height: 600px;
     }
+  }
 }
 
-@media screen and (max-width:768px) {
-    .Dashboard,.Account,.Collections,.Collects,.School,.Design,.Work,.Personal,.Variant,.House{
-        
-        grid-template-columns: 200px 1fr;
-       
-    }
+@media screen and (max-width: 768px) {
+  .Dashboard,
+  .Account,
+  .Collections,
+  .Collects,
+  .School,
+  .Design,
+  .Work,
+  .Personal,
+  .Variant,
+  .House {
+    grid-template-columns: 200px 1fr;
+  }
 
+  .CollectionDets {
+    .innerCollectionDets {
+      h3 {
+        margin-bottom: 20px;
+      }
 
-    .CollectionDets{
-        .innerCollectionDets{
-            h3{
-                margin-bottom: 20px;
-            }
-    
-            .collectionItems{
-                width: fit-content;
-                grid-template-columns: repeat(2,1fr);
-                gap: 12px;
-                a{
-                    text-decoration: none;
-                    .collects{
-                        width: 190px;
-                        height: 150px;
-                    }
-                }
-    
-            }
+      .collectionItems {
+        width: fit-content;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        a {
+          text-decoration: none;
+          .collects {
+            width: 190px;
+            height: 150px;
+          }
         }
+      }
     }
+  }
 
-    .innerSchool{
-        .schoolDets{
-            width: 70%;
-        }
+  .innerSchool {
+    .schoolDets {
+      width: 70%;
     }
+  }
 }
 
-@media screen and (max-width:620px) {
+@media screen and (max-width: 620px) {
+  .Header {
+    bottom: 0;
+    height: 55px;
+    @include display(center, center, flex);
+    gap: 12%;
 
-    .Header{
-        bottom: 0;
-        height: 55px;
-        @include display(center,center , flex, );
-        gap: 12%;
+    .headerOne {
+      gap: 38px;
+      padding-left: 0px;
 
-      
-        .headerOne{
-            gap: 38px;
-            padding-left: 0px;
-        
-            img{
-                width: 30px;
-                height: 30px;
-            }
-    
-            li{
-                gap: 5px;
+      img {
+        width: 30px;
+        height: 30px;
+      }
 
-                & a:nth-of-type(1) img{
-                    width: 30px;
-                    height: 30px;
-                }
-                
-                & a:nth-of-type(2){
-                    display: none;
-                }
-            }
+      li {
+        gap: 5px;
+
+        & a:nth-of-type(1) img {
+          width: 30px;
+          height: 30px;
         }
-    
-        .headerTwo{
-            padding-right: 0px;
-            gap: 38px;
-            .acc{
-                @include display( );
-                img{
-                    width: 27px;
-                    height: 27px;
-                    border-radius: 3px;
-                }
-            }
-    
+
+        & a:nth-of-type(2) {
+          display: none;
         }
-        img{
-            width: 30px;
-            height: 30px;
-        }
-    
-    
-    
+      }
     }
 
-    .Dashboard,.Account,.Collections,.Collects,.School,.Design,.Work,.Personal,.Variant,.House{
+    .headerTwo {
+      padding-right: 0px;
+      gap: 38px;
+      .acc {
+        @include display();
+        img {
+          width: 27px;
+          height: 27px;
+          border-radius: 3px;
+        }
+      }
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .Dashboard,
+  .Account,
+  .Collections,
+  .Collects,
+  .School,
+  .Design,
+  .Work,
+  .Personal,
+  .Variant,
+  .House {
+    width: 100%;
+    height: 850px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 100px 55px;
+    grid-template-areas:
+      "otherComponents"
+      "sidebar"
+      "dashboardHeader";
+  }
+
+  .CollectionDets {
+    .innerCollectionDets {
+      width: 90%;
+      margin-top: 25px;
+      margin-bottom: 75px;
+      h3 {
+        margin-bottom: 0px;
+      }
+      .collectionItems {
+        margin-top: -20px;
         width: 100%;
-        height: 850px;
-        grid-template-columns:  1fr;
-        grid-template-rows: 1fr 100px 55px;
-        grid-template-areas: 
-        'otherComponents'
-        'sidebar'
-        'dashboardHeader';
-    }
-
-
-    .CollectionDets{
-        .innerCollectionDets{
-            width: 90%;
-            margin-top: 25px;
-            margin-bottom: 75px;
-            h3{
-                margin-bottom: 0px;
-            }
-            .collectionItems{
-                margin-top: -20px;
-                width: 100%;
-                a{
-                    .collects{
-                        width: 100%;
-                        height: 150px;
-                    }
-                }
-    
-            }
+        a {
+          .collects {
+            width: 100%;
+            height: 150px;
+          }
         }
+      }
     }
+  }
 
-    .innerSchool{
-        // height: max-content;
+  .innerSchool {
+    // height: max-content;
 
-        margin-bottom: 70px;
-        .schoolDets{
-            width: 90%;
-            margin-top: 30px;
-        }
+    margin-bottom: 70px;
+    .schoolDets {
+      width: 90%;
+      margin-top: 30px;
     }
+  }
 
-    .innerDashboard{
-        .dashboardInfo{
-            width: 90%;
-            margin-top: 30px;
-        }
+  .innerDashboard {
+    .dashboardInfo {
+      width: 90%;
+      margin-top: 30px;
     }
+  }
 
-    .myAccount{
-        @extend %componentCover;
-        
-        .accountDets{
-            margin-top: 20px;
-            width: 90%;
-            gap: 20px;
-            height: 650px;
+  .myAccount {
+    @extend %componentCover;
 
-            .myAccountSpan{
-                margin-bottom: 5px;
-            }
-    
-            .accountItems{
-                height: 230px;
-            }
-            .pro{
-                height: 140px;     
-            }
-            
-        }
+    .accountDets {
+      margin-top: 20px;
+      width: 90%;
+      gap: 20px;
+      height: 650px;
+
+      .myAccountSpan {
+        margin-bottom: 5px;
+      }
+
+      .accountItems {
+        height: 230px;
+      }
+      .pro {
+        height: 140px;
+      }
     }
+  }
 
+  .SideBar {
+    border-radius: 10px;
+    margin: 0 auto;
+    left: unset;
+    width: 90%;
+    height: 350px;
+    animation: sider 0.7s ease both;
+    margin-top: 20px;
+  }
 
-    .SideBar{
-        border-radius: 10px;
-        margin: 0 auto;
+  #close {
+    display: none;
+
+    @keyframes sider {
+      from {
         left: unset;
-        width: 90%;
-        height: 350px;
-        animation: sider .7s ease both;
-        margin-top: 20px;
+      }
+      to {
+        left: unset;
+      }
     }
+  }
 
-     #close{
-        display: none;
-
-        @keyframes sider {
-            from{
-             left: unset;
-            }
-            to{
-             left: unset;
-            }
-        }
-    }
-    
-    #extend{
-        height: unset;
-        display: unset;
-        grid-template-columns:  unset;
-        grid-template-rows: unset;
-        grid-template-areas: unset;
-        animation-name: unset;
-    }
-
-
+  #extend {
+    height: unset;
+    display: unset;
+    grid-template-columns: unset;
+    grid-template-rows: unset;
+    grid-template-areas: unset;
+    animation-name: unset;
+  }
 }
 
-@media screen and (max-width:375px) {
+@media screen and (max-width: 375px) {
+  .Header {
+    gap: 12%;
 
-    .Header{
-        gap: 12%;
+    .headerOne {
+      gap: 38px;
 
-      
-        .headerOne{
-            gap: 38px;
-        
-            img{
-                width: 23px;
-                height: 23px;
-            }
-    
-            li{
+      img {
+        width: 23px;
+        height: 23px;
+      }
 
-                & a:nth-of-type(1) img{
-                    width: 23px;
-                    height: 23px;
-                }
-
-            }
+      li {
+        & a:nth-of-type(1) img {
+          width: 23px;
+          height: 23px;
         }
-    
-        .headerTwo{
-            gap: 38px;
-            .acc{
-                img{
-                    width: 23px;
-                    height: 23px;
-                    border-radius: 3px;
-                }
-            }
-    
+      }
+    }
+
+    .headerTwo {
+      gap: 38px;
+      .acc {
+        img {
+          width: 23px;
+          height: 23px;
+          border-radius: 3px;
         }
-        img{
-            width: 23px;
-            height: 23px;
-        }
+      }
     }
+    img {
+      width: 23px;
+      height: 23px;
+    }
+  }
 
-
-
-    .myAccount{
-        
-        .accountDets{    
-            .accountItems{
-                div{
-                    span{
-                        p:nth-of-type(2){
-                            font-size: 12px;
-                        }
-
-                    }
-                    a{
-                        .edit{
-                            width: 45px;
-                            height: 25px;
-                            font-size: 9px;
-                        }
-                    }
-                }
+  .myAccount {
+    .accountDets {
+      .accountItems {
+        div {
+          span {
+            p:nth-of-type(2) {
+              font-size: 12px;
             }
-            .pro{
-                height: 140px;  
-                .first{
-                    a{
-                        .black{
-                            width: 110px;
-                            height: 30px;
-                            font-size: 10px;
-                        }
-                    }
-                }  
-                
-                .proBenefits{
-                    a{
-                        font-size: 13px;
-
-                        img{
-                            width: 16px;
-                            height: 16px;
-                        }
-                    }
-                }
+          }
+          a {
+            .edit {
+              width: 45px;
+              height: 25px;
+              font-size: 9px;
             }
-            
+          }
         }
-    }
+      }
+      .pro {
+        height: 140px;
+        .first {
+          a {
+            .black {
+              width: 110px;
+              height: 30px;
+              font-size: 10px;
+            }
+          }
+        }
 
+        .proBenefits {
+          a {
+            font-size: 13px;
 
-    .searchInput{
-        width: 130px;
-        border-radius: 21px !important;
-        padding-left: 12px;
+            img {
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
     }
+  }
 
-    .searchImage{
-        width: 15px !important;
-        height: 15px !important;
-    }
+  .searchInput {
+    width: 130px;
+    border-radius: 21px !important;
+    padding-left: 12px;
+  }
 
-    .complete img:nth-of-type(2) {
-        left: 90%;
-        width: 18px;
-        height: 18px;
-    }
+  .searchImage {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .complete img:nth-of-type(2) {
+    left: 90%;
+    width: 18px;
+    height: 18px;
+  }
 }
